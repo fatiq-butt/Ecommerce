@@ -5,6 +5,7 @@
         <div class="card shadow-2-strong" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
             <h3 class="mb-5">Sign in</h3>
+
               <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                   <div class="form-outline mb-4">
                     <%= f.label :email, class: "form-label" %>
@@ -30,7 +31,5 @@
     </div>
   </div>
 </section>
-            
-            
-
-
+<section class="vh-150" style="background-color: #508bfc; display: none;">
+</section>
