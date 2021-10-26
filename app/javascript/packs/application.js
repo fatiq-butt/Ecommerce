@@ -6,4 +6,4 @@ require("channels")
 require("jquery")
 import $ from 'jquery';
 global.$ = jQuery;
-require("custom/sign_in");
+require("custom/sign_up_click");
