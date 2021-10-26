@@ -5,15 +5,14 @@
         <div class="card shadow-2-strong" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
             <h3 class="mb-5">Sign in</h3>
-
               <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                   <div class="form-outline mb-4">
                     <%= f.label :email, class: "form-label" %>
-                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control form-control-lg" %>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email",required: true, class:"form-control form-control-lg" %>
                   </div>
                   <div class="form-outline mb-4">
                     <%= f.label :password , class: "form-label" %>
-                    <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg" %>
+                    <%= f.password_field :password, autocomplete: "current-password", required: true,class: "form-control form-control-lg" %>
                 </div>
                 <% if devise_mapping.rememberable? %>
                   <div class="form-check d-flex justify-content-start mb-4">
@@ -31,5 +30,6 @@
     </div>
   </div>
 </section>
-<section class="vh-150" style="background-color: #508bfc; display: none;">
+<section class="vh-150 d-none" style="background-color: #508bfc;">
 </section>
+  
