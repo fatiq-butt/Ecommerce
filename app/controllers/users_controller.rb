@@ -1,4 +1,6 @@
 class UsersController < AdminController
   def index
-  end  
+    @users = User.where(:role => 'user')
+  end
+
 end
