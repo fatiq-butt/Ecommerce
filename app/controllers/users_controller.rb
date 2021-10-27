@@ -1,3 +1,4 @@
-class UsersController < ApplicationController
-  before_action :authenticate_user!
+class UsersController < AdminController
+  def index
+  end  
 end
