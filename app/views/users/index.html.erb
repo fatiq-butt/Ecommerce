@@ -1,17 +1,11 @@
 <div id="wrapper">
-  <div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-          <a href="#">Users</a>
-      </li>
-    </ul>
-  </div>
   <div id="page-content-wrapper">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
           <h2> User Database </h2>
           <hr></hr>
+          
           <table class="table">
             <thead class="thead-dark">
               <tr>
@@ -25,6 +19,7 @@
               <%= render partial: 'users', collection: @users %>
             </tbody>
           </table>
+        
         </div>
       </div>
     </div>
