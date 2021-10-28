@@ -2,7 +2,7 @@ class UsersController < AdminController
   before_action :set_user, only: %i[ show edit update destroy ] 
 
   def index
-    @users = User.where(:role => 'user')
+    @pagy, @users = pagy(User.where(:role => 'user'), items: 5)
   end
 
   def destroy
