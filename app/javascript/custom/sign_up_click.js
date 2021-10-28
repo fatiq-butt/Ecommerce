@@ -1,5 +1,5 @@
-$( document ).ready(function() {
-  if ($("#errors")[0] !== undefined)
+$(document).ready(function() {
+  if ($("#errors").length > 0)
   {
     $("#errors")[0].click()
   }
