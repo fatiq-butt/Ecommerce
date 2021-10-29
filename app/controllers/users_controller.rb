@@ -6,8 +6,16 @@ class UsersController < AdminController
       @pagy, @users = pagy(User.where(:role => 'user').global_search(params[:search]), items: 5)  
     else
       @pagy, @users = pagy(User.where(:role => 'user'), items: 5)
-    end  
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @users.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+      
   end
+
+  def show;end
 
   def destroy
     respond_to do |format|
