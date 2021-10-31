@@ -18,27 +18,10 @@
                 <% end %>
               
               </div>
-            </div>  
+            </div>      
           <hr></hr>
-
-          <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%= render partial: 'users', collection: @users %>
-            </tbody>
-          </table>
-          
-          <p><%= link_to("Generate Report", users_path(format: :csv), class: "btn btn-primary",) %></p>
+          <%= render partial: 'user_module' %>
         </div>
-        <%= pagy_bootstrap_nav(@pagy).html_safe %>
       </div>
     </div>
   </div>

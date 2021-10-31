@@ -1,0 +1,41 @@
+<div class="user-module">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+
+        <th scope="col">ID
+          <%= link_to  sort: :id, order: sorting_method[:order] ,remote: true do %>
+            <i class="fas fa-sort"></i>
+          <%end%>
+        </th>
+
+        <th scope="col">First Name 
+          <%= link_to sort: :first_name, order: sorting_method[:order] ,remote: true  do %>
+            <i class="fas fa-sort"></i>
+          <%end%>  
+        </th>
+
+        <th scope="col">Last Name
+          <%= link_to sort: :last_name, order: sorting_method[:order] ,remote: true  do %>
+            <i class="fas fa-sort"></i>
+          <%end%>
+        </th>
+
+        <th scope="col">Email
+          <%= link_to sort: :email, order: sorting_method[:order] ,remote: true do %>
+            <i class="fas fa-sort"></i>
+          <%end%>
+        </th>
+
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'users', collection: @users %>
+    </tbody>
+  </table>
+
+  <p><%= link_to("Generate Report", users_path(format: :csv), class: "btn btn-primary",) %></p>
+  <%= pagy_bootstrap_nav(@pagy).html_safe %>
+  
+</div>
