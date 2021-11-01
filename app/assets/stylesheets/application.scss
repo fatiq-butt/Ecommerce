@@ -13,4 +13,10 @@
  *= require_tree .
  *= require_self
  */
-  @import "bootstrap/scss/bootstrap"
+  @import "bootstrap/scss/bootstrap";
+  #sign_up_sec{
+    background-color: #508bfc;
+  }
+  .vh-100{
+    background-color: #508bfc;
+  }
