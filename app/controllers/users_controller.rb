@@ -20,6 +20,18 @@ class UsersController < AdminController
 
   def show;end
 
+  def edit;end
+
+  def update
+    if @user.update(user_params)
+      flash[:notice] = "User Updated Successfully.."
+      redirect_to users_path
+    else
+      flash[:errors] =  @user.errors.full_messages
+      render 'edit'
+    end
+  end
+
   def destroy
     respond_to do |format|
       @user.destroy
@@ -28,6 +40,10 @@ class UsersController < AdminController
   end
 
   private 
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
 
   def set_user
     @user = User.find(params[:id])

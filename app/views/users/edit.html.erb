@@ -1,0 +1,53 @@
+<div id="wrapper">
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6">
+              
+              <% if flash[:errors].present? %>
+                <div class="container">
+                  <div class="alert alert-danger" role="alert">
+                    <ul>
+                      <%= render "devise/shared/flash_errors", resource: flash[:errors] %>
+                    </ul>
+                  </div>
+                </div>    
+              <% end %>
+              
+              <h2> Edit Profile </h2>
+            </div>
+          </div>
+          <hr></hr>
+          <div class="row">
+            <%= form_with model: @user, url: user_path do |f| %>
+              <div class="form-group">
+                <%= f.label :first_name , "First Name: "%>
+                <%= f.text_field :first_name, class: "form-control" %><br>
+              </div>
+                <%= f.label :last_name , "Last Name: "%>
+                <%= f.text_field :last_name, class: "form-control" %><br>
+              </div>   
+              <div class="form-group">
+                <%= f.label :email , "Email :" %>
+                <%= f.email_field :email, class: "form-control" %><br>
+              </div>
+              <div class="form-group">
+                <%= f.label :password , "New Password :" %>
+                <%= f.password_field :password, class: "form-control" %><br>
+                <small class="form-text text-muted">Hint: Password The password should be atleast 8 characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like !*?$%^&).</small>
+              </div>
+              <div class="form-group">
+                <%= f.label :password_confirmation , "Confirm New Password :" %>
+                <%= f.password_field :password_confirmation,class: "form-control" %><br>
+              </div>  
+              <%= f.submit "update", class:"btn btn-primary" %>
+            <% end %>
+          <%= link_to "Back" , users_path, class: "btn btn-primary"  %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

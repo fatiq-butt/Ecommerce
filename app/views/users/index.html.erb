@@ -3,6 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
+          <%= render '/shared/flash_messages', resource: flash[:notice] %>
           <div class="row">
             <div class="col-lg-6">
               <h2> User Database </h2>

@@ -6,6 +6,6 @@
   <td>
     <%= link_to "Show" , user_path(users), class: "btn btn-primary"  %>
     <%= link_to "Delete" , user_path(users), method: :delete, data: {confirm: "Are you sure?",remote: true } , class: "btn btn-danger"  %>
-    <%= link_to "Edit" , user_path(users), method: :delete, data: {confirm: "Are you sure?",remote: true } , class: "btn btn-primary"  %>
+    <%= link_to "Edit" , edit_user_path(users), class: "btn btn-primary"  %>
   </td>
 </tr>
