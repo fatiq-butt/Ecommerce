@@ -1,10 +1,10 @@
 module UsersHelper
 
-  def sorting_method
-    if(params[:order].present? && params[:order] == "DESC") || params[:order].blank?    
-      return {order: "ASC"}
+  def sorting_method(column)
+    if(params[:sort] == column && params[:order] == "ASC")
+      "DESC"
     else
-      return {order: "DESC"}
+      "ASC"
     end
   end
 
