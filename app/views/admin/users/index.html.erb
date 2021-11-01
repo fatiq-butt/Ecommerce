@@ -11,7 +11,7 @@
             <div class="col-lg-5">
               <div class="input-group">
                 
-                <%= form_with(url: users_path, method: :get) do |f|%>
+                <%= form_with(url: admin_users_path, method: :get) do |f|%>
                   <div class="d-flex ">
                     <div class="style-me"><%= f.text_field :search, class:"form-control rounded" %></div>
                     <div><%= f.submit "Search", name:nil , class: "btn btn-outline-primary"%></div>
