@@ -15,5 +15,4 @@ class RegistrationsController < Devise::RegistrationsController
       render "devise/sessions/new"
     end       
   end
-  
 end
