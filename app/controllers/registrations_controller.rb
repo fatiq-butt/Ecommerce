@@ -6,7 +6,9 @@ class RegistrationsController < Devise::RegistrationsController
     respond_to do |format|
       format.js
     end    
-  end  
+  end 
+  
+  def show;end
   
   def check_resource
     build_resource(sign_up_params)  
@@ -15,5 +17,4 @@ class RegistrationsController < Devise::RegistrationsController
       render "devise/sessions/new"
     end       
   end
-  
 end

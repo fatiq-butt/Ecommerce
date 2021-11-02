@@ -6,7 +6,7 @@
           <div class="card-body p-5 text-center">
             <h3 class="mb-5">Sign in</h3>
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <%= render '/shared/flash_messages', resource: resource %>
+              <%= render '/shared/flash_messages' %>
               <div class="form-outline mb-4">
                 <%= f.label :email, class: "form-label" %>
                 <%= f.email_field :email, autofocus: true, autocomplete: "email",required: true, class:"form-control form-control-lg" %>

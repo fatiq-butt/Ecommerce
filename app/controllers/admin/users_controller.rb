@@ -1,6 +1,7 @@
 class Admin::UsersController < AdminController
   before_action :set_user, only: %i[ show edit update destroy ] 
-
+  before_action :params_for_update, only: :update
+  
   def index
     if params[:order].present?
         @pagy, @users = pagy(User.where(role:'user').order(params[:sort] => params[:order]), items: 5)
@@ -14,8 +15,7 @@ class Admin::UsersController < AdminController
       format.html
       format.js
       format.csv { send_data User.all.to_csv, filename: "users-#{Date.today}.csv" }
-    end
-      
+    end   
   end
 
   def show;end
@@ -45,8 +45,11 @@ class Admin::UsersController < AdminController
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
 
+  def params_for_update
+    params.require(:user).permit(:first_name, :last_name, :password, :password_confirmation)
+  end
+
   def set_user
     @user = User.find(params[:id])
   end  
-
 end

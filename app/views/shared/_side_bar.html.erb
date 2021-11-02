@@ -1,6 +1,12 @@
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
     <li class="sidebar-brand">
+        <%= link_to "My Profile", profile_path %>
+    </li>
+    <li class="sidebar-brand">
+        <%= link_to "Edit My Profile", user_edit_path %>
+    </li>
+    <li class="sidebar-brand">
         <%= link_to "List all Users", admin_users_path %>
     </li>
   </ul>

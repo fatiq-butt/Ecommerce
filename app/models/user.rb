@@ -11,7 +11,8 @@ class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :password, format: {with: /(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}/, message: "The password should be atleast 8 characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like !*?$%^&)."}
+  validates :password, format: {with: /(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}/, 
+  message: "The password should be atleast 8 characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like !*?$%^&)."}, if: :password_validation 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
 
   def set_default_role
@@ -26,11 +27,13 @@ class User < ApplicationRecord
         csv << attributes.map{ |attr| user.send(attr) }
       end
     end
-
   end
 
   def name
     "#{first_name} #{last_name}"
   end
 
+  def password_validation
+    new_record? || encrypted_password_changed?
+  end
 end
