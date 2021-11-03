@@ -1,4 +1,4 @@
-class UsersController < AdminController
+class Admin::UsersController < AdminController
   before_action :set_user, only: %i[ show edit update destroy ] 
 
   def index
@@ -21,5 +21,4 @@ class UsersController < AdminController
   def set_user
     @user = User.find(params[:id])
   end  
-
 end
