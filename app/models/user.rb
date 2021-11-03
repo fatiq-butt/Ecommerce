@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   include PgSearch::Model
-  pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id]
+  pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: {tsearch: {prefix: true}}
  
   USER = :user
   ADMIN = :admin
