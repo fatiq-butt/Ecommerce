@@ -1,9 +1,0 @@
-<tr id="user_<%= users.id %>">
-  <td><%= users.first_name %></td>
-  <td><%= users.last_name %></td>
-  <td><%= users.email %></td>
-  <td>
-    <%= link_to "Delete" , user_path(users), method: :delete, data: {confirm: "Are you sure?",remote: true } , class: "btn btn-danger"  %>
-    <%= link_to "Edit" , user_path(users), method: :delete, data: {confirm: "Are you sure?",remote: true } , class: "btn btn-primary"  %>
-  </td>
-</tr>
