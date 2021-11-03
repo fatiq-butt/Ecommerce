@@ -10,10 +10,9 @@ class RegistrationsController < Devise::RegistrationsController
   
   def check_resource
     build_resource(sign_up_params)  
-    unless resource.validate
+    unless resource.valid?
       flash[:errors] = resource.errors.full_messages
       render "devise/sessions/new"
     end       
   end
-  
 end
