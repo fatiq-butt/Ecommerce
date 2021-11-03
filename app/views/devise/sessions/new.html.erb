@@ -1,4 +1,4 @@
-<section class="vh-100" style="background-color: #508bfc;">
+<section class="vh-150 signup-background">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -6,7 +6,7 @@
           <div class="card-body p-5 text-center">
             <h3 class="mb-5">Sign in</h3>
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <%= render '/shared/flash_messages' %>
+              <%= render '/shared/flash_messages'%>
               <div class="form-outline mb-4">
                 <%= f.label :email, class: "form-label" %>
                 <%= f.email_field :email, autofocus: true, autocomplete: "email",required: true, class:"form-control form-control-lg" %>
@@ -31,5 +31,5 @@
     </div>
   </div>
 </section>
-<section class="vh-150 d-none" style="background-color: #508bfc;">
+<section class="vh-150 d-none signup-background">
 </section>

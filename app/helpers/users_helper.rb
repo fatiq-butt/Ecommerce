@@ -7,5 +7,4 @@ module UsersHelper
       "ASC"
     end
   end
-
 end
