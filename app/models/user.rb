@@ -1,7 +1,7 @@
 require 'csv'
 class User < ApplicationRecord
   include PgSearch::Model
-  pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id]
+  pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: {tsearch: {prefix: true}}
  
   USER = :user
   ADMIN = :admin
@@ -19,20 +19,16 @@ class User < ApplicationRecord
   end
   
   def self.to_csv
-    attributes = %w{id name email}
-    
+    attributes = %w{id name email}    
     CSV.generate(headers: true) do |csv|
       csv << attributes
-
       all.each do |user|
         csv << attributes.map{ |attr| user.send(attr) }
       end
     end
-
   end
 
   def name
     "#{first_name} #{last_name}"
   end
-
 end
