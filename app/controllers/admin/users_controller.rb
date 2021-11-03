@@ -1,4 +1,4 @@
-class UsersController < AdminController
+class Admin::UsersController < AdminController
   before_action :set_user, only: %i[ show edit update destroy ] 
 
   def index
@@ -10,9 +10,9 @@ class UsersController < AdminController
 
     respond_to do |format|
       format.html
-      format.csv { send_data @users.to_csv, filename: "users-#{Date.today}.csv" }
+      format.js
+      format.csv { send_data User.all.to_csv, filename: "users-#{Date.today}.csv" }
     end
-      
   end
 
   def show;end
@@ -29,5 +29,4 @@ class UsersController < AdminController
   def set_user
     @user = User.find(params[:id])
   end  
-
 end
