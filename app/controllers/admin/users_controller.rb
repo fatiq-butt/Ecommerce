@@ -18,14 +18,12 @@ class Admin::UsersController < AdminController
 
   def create
     @user = User.new(user_params)
-    @password = Devise.friendly_token.first(Devise.password_length.first)
+    @password = SecureRandom.alphanumeric + User::SPECIAL_CHAR.sample(2).join
     @user.password = @password
     @user.password_confirmation = @password
-    @user.skip_password_validation = true
-    
-    InviteMailer.with(user: @user, password: @password).invite_created.deliver_now
-    @user.skip_confirmation!
+    @user.skip_confirmation!    
     if @user.save
+      InviteMailer.with(user: @user, password: @password).invite_created.deliver_now
       redirect_to admin_users_path , notice: "Invite email sent successfully"
     end
   end
