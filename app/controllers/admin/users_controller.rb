@@ -21,6 +21,7 @@ class Admin::UsersController < AdminController
     @password = SecureRandom.alphanumeric + User::SPECIAL_CHAR.sample(2).join
     @user.password = @password
     @user.password_confirmation = @password
+    @user.invited_user = false
     @user.skip_confirmation!    
     if @user.save
       InviteMailer.with(user: @user, password: @password).invite_created.deliver_now
