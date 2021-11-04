@@ -6,14 +6,17 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
      devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name,:last_name ,:email, :password,:password_confirmation)}
-     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name,:last_name, :email, :password,:current_password)}
+     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name,:last_name, :email, :password, :password_confirmation, :current_password)}
   end
   
   def after_sign_in_path_for(resource)
     if current_user.admin?
       admin_users_path
-    else 
+    elsif current_user.user? && current_user.invited_user 
+      flash[:notice] = "Change your password to something you will remember"
+      edit_user_registration_path
+    else
       root_path
-    end  
+    end    
   end
 end

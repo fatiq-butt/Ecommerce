@@ -18,10 +18,10 @@ class Admin::UsersController < AdminController
 
   def create
     @user = User.new(user_params)
-    @password = SecureRandom.alphanumeric + User::SPECIAL_CHAR.sample(2).join
+    @password = User.generate_random_password
     @user.password = @password
     @user.password_confirmation = @password
-    @user.invited_user = false
+    @user.invited_user = true
     @user.skip_confirmation!    
     if @user.save
       InviteMailer.with(user: @user, password: @password).invite_created.deliver_now

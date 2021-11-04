@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
-  
+  before_update :check_password_changed
+
   USER = :user
   ADMIN = :admin
   ROLES = [USER, ADMIN]
@@ -14,9 +15,26 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :password, format: {
     with: PASSWORD_REGEX, 
-    message: "should be atleast 8 characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like !*?$%^&)."}
-  
+    message: "should be atleast 8 characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like !*?$%^&)."},
+    if: :password_validation
+
+  private
+
   def set_default_role
     self.role ||= :user
+  end
+
+  def check_password_changed
+    if encrypted_password_changed?
+      self.invited_user = false
+    end
+  end
+
+  def password_validation
+    new_record? || encrypted_password_changed?
+  end
+
+  def self.generate_random_password
+    SecureRandom.alphanumeric + SPECIAL_CHAR.sample(2).join
   end
 end

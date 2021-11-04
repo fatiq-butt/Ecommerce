@@ -14,5 +14,5 @@ class RegistrationsController < Devise::RegistrationsController
       flash[:errors] = resource.errors.full_messages
       render "devise/sessions/new"
     end       
-  end
+  end  
 end
