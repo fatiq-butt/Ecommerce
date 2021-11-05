@@ -14,5 +14,9 @@
     <%= f.label :status , "Status :" %>
     <%= f.select :status, Product::STATUS, {}, {class: "form-control"} %>
   </div>
+  <div class="form-group">
+    <%= f.label "Upload Product Image" %>
+    <%= f.file_field :images, multiple: true, direct_upload: true %>  
+  </div>
   <%= f.submit class: "btn btn-primary" %>    
 <% end %>

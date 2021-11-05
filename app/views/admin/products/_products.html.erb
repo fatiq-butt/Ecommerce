@@ -1,0 +1,29 @@
+<tr id="user_<%= products.id %>">
+  <td><%= products.id %></td>
+  <td><%= products.title %></td>
+  <td>$ <%= products.price %></td>
+  <td><%= products.status %></td>
+  <td>
+    <%= link_to "Show", admin_product_path(products), class: "btn btn-primary"  %>
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
+        Delete
+      </button>
+    <%= link_to "Edit", edit_admin_product_path(products), class: "btn btn-primary" %>
+  </td>
+</tr>
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete User Request</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure? You want to delete this user..
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Delete", admin_product_path(products), method: :delete, class: "btn btn-danger","data-bs-dismiss" =>"modal", remote: true%>
+      </div>
+    </div>
+  </div>
+</div>

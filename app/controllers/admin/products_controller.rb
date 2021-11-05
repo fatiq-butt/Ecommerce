@@ -1,5 +1,7 @@
 class Admin::ProductsController < AdminController
-  def index;end
+  def index
+    @products = Product.all
+  end
   
   def new
     @product = Product.new        
@@ -17,6 +19,6 @@ class Admin::ProductsController < AdminController
   private
 
   def product_params
-    params.require(:product).permit(:title, :price, :description, :status)
+    params.require(:product).permit(:title, :price, :description, :status,images: [])
   end
 end
