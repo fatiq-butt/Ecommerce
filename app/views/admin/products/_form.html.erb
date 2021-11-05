@@ -16,7 +16,7 @@
   </div>
   <div class="form-group">
     <%= f.label "Upload Product Image" %>
-    <%= f.file_field :images, multiple: true, direct_upload: true %>  
+    <%= f.file_field :images, multiple: true, accept: 'image/png,image/jpeg', direct_upload: true %>  
   </div>
   <%= f.submit class: "btn btn-primary" %>    
 <% end %>

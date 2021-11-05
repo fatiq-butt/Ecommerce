@@ -1,4 +1,4 @@
-<tr id="user_<%= products.id %>">
+<tr id="product_<%= products.id %>">
   <td><%= products.id %></td>
   <td><%= products.title %></td>
   <td>$ <%= products.price %></td>
@@ -22,7 +22,7 @@
         Are you sure? You want to delete this user..
       </div>
       <div class="modal-footer">
-        <%= link_to "Delete", admin_product_path(products), method: :delete, class: "btn btn-danger","data-bs-dismiss" =>"modal", remote: true%>
+        <%= link_to "Delete", admin_product_path(products), method: :delete, class: "btn btn-danger","data-bs-dismiss" =>"modal", remote: true %>
       </div>
     </div>
   </div>
