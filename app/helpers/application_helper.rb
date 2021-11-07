@@ -1,5 +1,6 @@
 module ApplicationHelper
-
+  include Pagy::Frontend
+    
   def build_alert_classes(alert_type)
     classes = 'alert alert-dismissable '
     case alert_type.to_sym 

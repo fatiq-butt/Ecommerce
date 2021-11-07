@@ -1,7 +1,21 @@
 class Admin::ProductsController < AdminController
   before_action :set_product, only: %i[ show edit update destroy ]
+  
   def index
-    @products = Product.all
+    if params[:order].present?
+        @pagy, @products = pagy(Product.all.order(params[:sort] => params[:order]), items: 5)
+    elsif params[:search].present?
+        @pagy, @products = pagy(Product.all.global_product_search(params[:search]), items: 5)
+    else
+      @pagy, @products = pagy(Product.all, items: 5)
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+      format.csv { send_data Product.all.to_csv, filename: "products-#{Date.today}.csv" }
+    end
+    
   end
   
   def new
