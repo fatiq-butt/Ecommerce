@@ -15,6 +15,7 @@ class Admin::ProductsController < AdminController
       format.js
       format.csv { send_data Product.generate_csv, filename: "products-#{Date.today}.csv" }
     end
+    
   end
   
   def new
@@ -57,6 +58,6 @@ class Admin::ProductsController < AdminController
   end
 
   def product_params
-    params.require(:product).permit(:title, :price, :description, :status, images: [])
+    params.require(:product).permit(:title, :price, :description, :status, :category_id, images: [])
   end
 end

@@ -5,13 +5,13 @@
   <td><%= products.status %></td>
   <td>
     <%= link_to "Show", admin_product_path(products), class: "btn btn-primary"  %>
-      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#product_modal_<%= products.id %>">
         Delete
       </button>
     <%= link_to "Edit", edit_admin_product_path(products), class: "btn btn-primary" %>
   </td>
 </tr>
-<div class="modal" id="myModal">
+<div class="modal" id="product_modal_<%= products.id %>">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
