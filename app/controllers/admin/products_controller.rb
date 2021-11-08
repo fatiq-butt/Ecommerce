@@ -13,9 +13,8 @@ class Admin::ProductsController < AdminController
     respond_to do |format|
       format.html
       format.js
-      format.csv { send_data Product.all.to_csv, filename: "products-#{Date.today}.csv" }
+      format.csv { send_data Product.generate_csv, filename: "products-#{Date.today}.csv" }
     end
-    
   end
   
   def new
