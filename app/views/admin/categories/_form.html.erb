@@ -1,0 +1,7 @@
+<%= form_for [:admin, @category] do |f| %>
+  <div class="form-group">
+    <%= f.label :name , "Name: "%>
+    <%= f.text_field :name, class: "form-control", required: true %><br>
+  </div>
+  <%= f.submit class: "btn btn-primary" %>    
+<% end %>
