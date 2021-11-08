@@ -8,6 +8,8 @@ class RegistrationsController < Devise::RegistrationsController
     end    
   end  
   
+  private
+  
   def check_resource
     build_resource(sign_up_params)  
     unless resource.valid?
