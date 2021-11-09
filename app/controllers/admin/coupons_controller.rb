@@ -19,11 +19,24 @@ class Admin::CouponsController < AdminController
     end  
   end
 
+  def show;end
+
+  def edit;end
+
   def destroy
     respond_to do |format|
       @coupon.destroy
       format.js
     end    
+  end
+
+  def update
+    if @coupon.update(coupon_params)
+      flash[:notice] = "Coupon Updated Successfully.."
+      redirect_to admin_coupons_path
+    else
+      render 'edit'
+    end
   end
 
   private
