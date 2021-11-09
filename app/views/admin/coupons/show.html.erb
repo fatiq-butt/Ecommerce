@@ -1,0 +1,32 @@
+<div id="wrapper">
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6">
+              <h2> Category Show </h2>
+            </div>      
+            <hr></hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Coupan Code</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"><%= @coupon.name %></p>
+                </div>
+              </div>
+              <hr>
+              <%= link_to 'Back', admin_coupons_path, class: "btn btn-primary"%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
