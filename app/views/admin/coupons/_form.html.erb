@@ -1,0 +1,17 @@
+<%= form_for [:admin, @coupon] do |f| %>
+  <div class="form-group">
+    <%= f.label :name , "Name: "%>
+    <%= f.text_field :name, class: "form-control", required: true %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label :discount , "Price: "%>
+    <%= f.number_field :discount, class: "form-control", required: true, step: :any %><br>
+  </div> 
+  <div class="form-group">
+    <%= f.label :discount , "Select Products: ", class: "mb-2"%>
+    <%= f.select :product_ids, Product.all.map{|cat| [cat.title,cat.id]} ,{}, class: "form-control dropdown_select2", multiple: true %>
+  </div>
+  <%= f.submit class: "btn btn-primary mt-4" %>    
+<% end %>
+
+</style>

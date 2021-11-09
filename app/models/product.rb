@@ -1,10 +1,10 @@
 require 'csv'
 class Product < ApplicationRecord
+  has_and_belongs_to_many :coupons
+  has_many_attached :images 
   belongs_to :category
 
   include PgSearch::Model
-
-  has_many_attached :images 
 
   STATUS = ["Publish", "Draft", "Pending"]
 

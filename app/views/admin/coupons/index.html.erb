@@ -1,0 +1,35 @@
+<div id="wrapper">
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6">
+              <h2> Coupons Listing </h2>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <%= link_to "Add New +", new_admin_coupon_path,class: "btn btn-primary" %> 
+              </div>
+            </div>  
+          <hr></hr>
+          <div class="Coupon-module">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Coupon Name</th>
+                  <th scope="col">Discount Value</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%= render partial: 'coupons', collection: @coupons %>
+              </tbody>
+            </table>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
