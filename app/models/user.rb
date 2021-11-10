@@ -2,6 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
   before_update :check_password_changed
 
+  has_one :cart
+  
   USER = :user
   ADMIN = :admin
   ROLES = [USER, ADMIN]
