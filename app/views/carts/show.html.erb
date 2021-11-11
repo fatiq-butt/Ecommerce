@@ -11,8 +11,28 @@
                     <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
                     <h6 class="mb-0 text-muted"><%= @line_items.count %> items</h6>
                   </div>
+                  <div class="row mb-4 d-flex justify-content-between align-items-center">
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                      <h6 class="text-black mb-0">Product Name</h6>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <h6 class="mb-0">Unit Price</h6>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                      <h6 class="mb-0">Quantity</h6>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <h6 class="mb-0">Price</h6>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <h6 class="mb-0">Delete</h6>
+                    </div>
+                  </div>
                   <hr class="my-4">
-                  <%= render partial: 'line_items', collection: @line_items %>
+                  <div id="cart_line_items_module">
+                    <%= render partial: 'line_items', collection: @line_items %>  
+                  </div>
+                  
                 </div>
               </div>
               <div class="col-lg-4 bg-grey">

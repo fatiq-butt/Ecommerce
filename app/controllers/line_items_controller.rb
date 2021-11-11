@@ -14,4 +14,13 @@ class LineItemsController < ApplicationController
     @line_item.save
     redirect_to cart_path(current_user.cart)
   end
+
+  def destroy
+    @line_item = LineItem.find(params[:id])
+    @line_item.destroy
+
+    respond_to do |format|
+      format.js
+    end
+  end
 end
