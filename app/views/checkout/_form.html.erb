@@ -1,15 +1,74 @@
-<%= form_for user_session_path do |f| %>
-  <div class="form-group">
-    <%= f.label :first_name , "Title: "%>
-    <%= f.text_field :first_name, class: "form-control", required: true %><br>
+<%= form_for user_registration_path do |f| %>
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :first_name , "First Name: "%>
+        <%= f.text_field :first_name, value: current_user.first_name, class: "form-control", required: true %><br>
+      </div>  
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :last_name , "Last Name: "%>
+        <%= f.text_field :last_name, value: current_user.last_name, class: "form-control", required: true, step: :any %><br>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :company_name , "Company Name :" %>
+        <%= f.text_field :company_name, value: current_user.company_name, class: "form-control", required: true %><br>
+      </div>  
+    </div>  
+  </div> 
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :state , "State :" %>
+        <%= f.text_field :state, value: current_user.state, class: "form-control", required: true %><br>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :address , "Address :" %>
+        <%= f.text_field :address, value: current_user.address, class: "form-control", required: true %><br>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :phone , "Phone :" %>
+        <%= f.text_field :phone, value: current_user.phone, class: "form-control", required: true %><br>
+      </div>
+    </div>
+  </div>  
+  
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :extension , "Extension :" %>
+        <%= f.text_field :extension, value: current_user.extension, class: "form-control", required: true %><br>
+      </div>  
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :city , "City :" %>
+        <%= f.text_field :city, value: current_user.city, class: "form-control", required: true %><br>
+      </div> 
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :zip_code , "Zip Code :" %>
+        <%= f.text_field :zip_code, value: current_user.zip_code, class: "form-control", required: true %><br>
+      </div>
+    </div>
+    
   </div>
-  <div class="form-group">
-    <%= f.label :last_name , "Price: "%>
-    <%= f.number_field :last_name, class: "form-control", required: true, step: :any %><br>
-  </div>   
-  <div class="form-group">
-    <%= f.label :email , "Description :" %>
-    <%= f.text_field :email, class: "form-control", required: true %><br>
+
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :country , "Country :" %>
+        <%= f.text_field :country, value: current_user.country, class: "form-control", required: true %><br>
+      </div>
+    </div>
   </div>
   <%= f.submit class: "btn btn-primary mb-5" %>    
 <% end %>
