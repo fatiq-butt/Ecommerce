@@ -23,4 +23,28 @@ class LineItemsController < ApplicationController
       format.js
     end
   end
+
+  def add_quantity 
+    @row_index = params[:row_index]
+    @line_item = LineItem.find(params[:id])
+    @line_item.quantity += 1
+    @line_item.save
+    @line_items = @line_item.cart.line_items
+    respond_to do |format|
+      format.js
+    end 
+  end
+
+  def reduce_quantity
+    @row_index = params[:row_index]
+    @line_item = LineItem.find(params[:id])
+    @line_items = @line_item.cart.line_items
+    if @line_item.quantity > 1
+      @line_item.quantity -= 1
+    end
+    @line_item.save
+    respond_to do |format|
+      format.js
+    end 
+  end
 end
