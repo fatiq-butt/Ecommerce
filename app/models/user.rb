@@ -3,7 +3,8 @@ class User < ApplicationRecord
   before_update :check_password_changed
   after_create :create_cart_for_user
   has_one :cart
-  
+  has_many :orders
+    
   USER = :user
   ADMIN = :admin
   ROLES = [USER, ADMIN]

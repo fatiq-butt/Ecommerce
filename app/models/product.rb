@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :coupons
   has_many_attached :images 
   has_many :line_items
+  has_many :orders, through: :receipt
   belongs_to :category
 
   include PgSearch::Model
