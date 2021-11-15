@@ -15,10 +15,10 @@ Rails.application.routes.draw do
   end
 
   resources :products
-  resources :checkout
-  resources :users
+  resources :checkout, only: [:index]
+  resources :users, only: [:update]
 
-  get 'carts/:id' => "carts#show", as: "cart"
+  get 'cart' => "carts#show", as: "cart"
   delete 'carts/:id' => "carts#destroy"
   post 'line_items/:id/add' => "line_items#add_quantity", as: "line_item_add"
   post 'line_items/:id/reduce' => "line_items#reduce_quantity", as: "line_item_reduce"

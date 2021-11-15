@@ -2,6 +2,6 @@
   <td><%= line_items.product.title %></td>
   <td>$<%= line_items.product.price %></td>
   <td><%= line_items.quantity %></td>
-  <td>$<%= line_items.quantity * line_items.product.price %></td>
-  <td><%= link_to '', line_item_path(line_items), method: :delete, class: 'fas fa-window-close', remote: true %></td>
+  <td>$ <%= line_item_price_calculate(line_items.quantity,line_items.product.price, line_items)%></td>
+  <td><%= link_to '', line_item_path(line_items), method: :delete, class: 'fas fa-window-close' %></td>
 </tr>

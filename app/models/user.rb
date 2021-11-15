@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
   before_update :check_password_changed
-
+  after_create :create_cart_for_user
   has_one :cart
   
   USER = :user
@@ -24,6 +24,10 @@ class User < ApplicationRecord
 
   def set_default_role
     self.role ||= :user
+  end
+
+  def create_cart_for_user
+    self.create_cart!
   end
 
   def check_password_changed

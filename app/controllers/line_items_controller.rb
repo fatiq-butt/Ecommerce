@@ -12,7 +12,10 @@ class LineItemsController < ApplicationController
       @line_item.product = @chosen_product
     end
     @line_item.save
-    redirect_to cart_path(current_user.cart)
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def destroy
@@ -20,6 +23,7 @@ class LineItemsController < ApplicationController
     @line_item.destroy
 
     respond_to do |format|
+      format.html {redirect_to checkout_index_path}
       format.js
     end
   end

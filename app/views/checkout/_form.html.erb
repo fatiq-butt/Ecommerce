@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-4">
       <div class="form-group">
-        <%= f.label :first_name , "First Name: "%>
+        <%= f.label :first_name, "First Name: "%>
         <%= f.text_field :first_name, value: current_user.first_name, class: "form-control", required: true %><br>
       </div>  
     </div>
@@ -14,7 +14,7 @@
     </div>
     <div class="col-4">
       <div class="form-group">
-        <%= f.label :company_name , "Company Name :" %>
+        <%= f.label :company_name, "Company Name :" %>
         <%= f.text_field :company_name, value: current_user.company_name, class: "form-control", required: true %><br>
       </div>  
     </div>  
@@ -63,7 +63,7 @@
     <div class="col-4">
       <div class="form-group customer_country_dropdown">
         <%= f.label :country , "Country :" %>
-        <%= f.select :country, options_for_select(CS.countries.map { |c| [c[1], c[0]] } )  ,{}, {value: current_user.city, class: "form-control", id: "country_select_dropdown_checkout", required: true} %><br>
+        <%= f.select :country, options_for_select(countries_drop_down)  ,{}, {value: current_user.city, class: "form-control", id: "country_select_dropdown_checkout", required: true} %><br>
       </div>
     </div>
   </div>
