@@ -8,7 +8,7 @@
     <%= f.number_field :discount, class: "form-control", required: true, step: :any %><br>
   </div> 
   <div class="form-group">
-    <%= f.label :discount , "Select Products: ", class: "mb-2"%>
+    <%= f.label :product_ids , "Select Products: ", class: "mb-2"%>
     <%= f.select :product_ids, coupons_drop_down ,{}, class: "form-control dropdown_select2", multiple: true %>
   </div>
   <%= f.submit class: "btn btn-primary mt-4" %>    

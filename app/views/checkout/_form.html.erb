@@ -1,4 +1,4 @@
-<%= form_for user_registration_path do |f| %>
+<%= form_with url: user_path(current_user), method: :put do |f| %>
   <div class="row">
     <div class="col-4">
       <div class="form-group">
@@ -23,7 +23,7 @@
     <div class="col-4">
       <div class="form-group">
         <%= f.label :state , "State :" %>
-        <%= f.text_field :state, value: current_user.state, class: "form-control", required: true %><br>
+        <%= f.select :state, options_for_select([]) ,{}, {value: current_user.state, class: "form-control", id: "customer_state_dropdown_checkout"} %>
       </div>
     </div>
     <div class="col-4">
@@ -39,7 +39,6 @@
       </div>
     </div>
   </div>  
-  
   <div class="row">
     <div class="col-4">
       <div class="form-group">
@@ -50,7 +49,7 @@
     <div class="col-4">
       <div class="form-group">
         <%= f.label :city , "City :" %>
-        <%= f.text_field :city, value: current_user.city, class: "form-control", required: true %><br>
+        <%= f.select :city, options_for_select([]) ,{}, {value: current_user.city, class: "form-control", id: "customer_city_dropdown_checkout"} %>
       </div> 
     </div>
     <div class="col-4">
@@ -59,16 +58,14 @@
         <%= f.text_field :zip_code, value: current_user.zip_code, class: "form-control", required: true %><br>
       </div>
     </div>
-    
   </div>
-
   <div class="row">
     <div class="col-4">
-      <div class="form-group">
+      <div class="form-group customer_country_dropdown">
         <%= f.label :country , "Country :" %>
-        <%= f.text_field :country, value: current_user.country, class: "form-control", required: true %><br>
+        <%= f.select :country, options_for_select(CS.countries.map { |c| [c[1], c[0]] } )  ,{}, {value: current_user.city, class: "form-control", id: "country_select_dropdown_checkout", required: true} %><br>
       </div>
     </div>
   </div>
-  <%= f.submit class: "btn btn-primary mb-5" %>    
+  <%= f.submit 'continue',class: "btn btn-primary mb-5", id: "submit_btn_cust_info_update" %>    
 <% end %>

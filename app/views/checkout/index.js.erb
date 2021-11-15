@@ -1,0 +1,20 @@
+var state = document.getElementById("customer_state_dropdown_checkout");
+var placeholder = document.createElement("option");
+placeholder.text = "Choose a state";
+placeholder.value = "";
+state.innerhtml=""
+state.append(placeholder);
+<% @states.each do |s| %>
+  state.options[state.options.length] = new Option('<%= s[1] %>', '<%= s[0] %>');
+<% end %>
+<% if @cities %>
+  var city = document.getElementById("customer_city_dropdown_checkout");
+  var placeholder = document.createElement("option");
+  placeholder.text = "Choose a state";
+  placeholder.value = "";
+  city.innerhtml=""
+  city.append(placeholder);
+  <% @cities.each do |s| %>
+    city.options[city.options.length] = new Option('<%= s %>', '<%= s %>');
+  <%end%>
+<%end%>

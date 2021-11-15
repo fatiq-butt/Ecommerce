@@ -3,4 +3,5 @@
   <td>$<%= line_items.product.price %></td>
   <td><%= line_items.quantity %></td>
   <td>$<%= line_items.quantity * line_items.product.price %></td>
+  <td><%= link_to '', line_item_path(line_items), method: :delete, class: 'fas fa-window-close', remote: true %></td>
 </tr>

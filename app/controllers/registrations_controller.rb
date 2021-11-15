@@ -6,8 +6,8 @@ class RegistrationsController < Devise::RegistrationsController
     respond_to do |format|
       format.js
     end    
-  end  
-  
+  end
+
   def check_resource
     build_resource(sign_up_params)  
     unless resource.validate

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :products
   resources :checkout
+  resources :users
 
   get 'carts/:id' => "carts#show", as: "cart"
   delete 'carts/:id' => "carts#destroy"
