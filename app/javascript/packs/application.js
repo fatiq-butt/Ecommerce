@@ -14,4 +14,8 @@ $(document).on('turbolinks:load', function () {
   $( ".dropdown_select2" ).select2({
     theme: "bootstrap"
   });
+
+  $("input.checkout_input").change(function(){
+    $('#submit_btn_cust_info_update').removeAttr("disabled")
+  });
 });

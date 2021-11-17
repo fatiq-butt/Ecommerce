@@ -1,7 +1,8 @@
 class CheckoutController < ApplicationController
   before_action :authenticate_user!
   before_action :set_states, :set_cities, only: [:index]  
-  def index  
+
+  def index
     @line_items = current_user.cart.line_items
     @total_price = current_user.cart.calculate_total_price(params[:coupon_code])
     
@@ -11,17 +12,21 @@ class CheckoutController < ApplicationController
     end
   end
 
+  def confirmation
+    Order.create_order(current_user)
+  end
+
   private
 
   def set_states
-    if params[:country]
+    if params[:country] && params[:state].nil?
       @states = CS.states(params[:country])
     end
   end
 
   def set_cities
     if params[:state]
-      @cities = CS.cities(params[:state],params[:country])
+      @cities = CS.cities(params[:state], params[:country])
     end
   end
 end

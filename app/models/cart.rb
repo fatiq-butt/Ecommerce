@@ -1,6 +1,6 @@
 class Cart < ApplicationRecord
   belongs_to :user
-  has_many :line_items
+  has_many :line_items, dependent: :destroy
 
   def calculate_total_price(coupon)
     @coupon = Coupon.find_by name: coupon

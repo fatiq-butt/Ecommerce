@@ -29,7 +29,11 @@
                   </div>
                   <hr class="my-4">
                   <div id="cart_line_items_module">
-                    <%= render partial: 'line_items', collection: @line_items %>  
+                    <% if @line_items.present? %>
+                      <%= render partial: 'line_items', collection: @line_items %>
+                    <%else%>
+                      <%= render partial: 'shared/empty_cart'%>
+                    <%end%>
                   </div>
                 </div>
               </div>

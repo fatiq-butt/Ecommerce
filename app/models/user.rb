@@ -2,8 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
   before_update :check_password_changed
   after_create :create_cart_for_user
-  has_one :cart
-  has_many :orders
+  has_one :cart, dependent: :destroy
+  has_many :orders, dependent: :destroy
     
   USER = :user
   ADMIN = :admin

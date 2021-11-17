@@ -1,9 +1,10 @@
 require 'csv'
 class Product < ApplicationRecord
   has_and_belongs_to_many :coupons
-  has_many_attached :images 
-  has_many :line_items
-  has_many :orders, through: :receipt
+  has_many_attached :images, dependent: :destroy
+  has_many :line_items, dependent: :destroy
+  has_many :receipts
+  has_many :orders, through: :receipts
   belongs_to :category
 
   include PgSearch::Model
