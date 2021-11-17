@@ -1,7 +1,7 @@
 require 'csv'
 class Coupon < ApplicationRecord
   has_and_belongs_to_many :products
-
+  has_many :orders
   include PgSearch::Model
 
   validates :name, presence: true

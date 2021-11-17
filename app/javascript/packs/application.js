@@ -16,6 +16,6 @@ $(document).on('turbolinks:load', function () {
   });
 
   $("input.checkout_input").change(function(){
-    $('#submit_btn_cust_info_update').removeAttr("disabled")
+    $('#submit_btn_cust_info_update').removeClass("disabled");
   });
 });

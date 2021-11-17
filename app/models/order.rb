@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   has_many :receipts, dependent: :destroy
   has_many :products, through: :receipts
   belongs_to :user
+  belongs_to :coupon
 
   private
 
