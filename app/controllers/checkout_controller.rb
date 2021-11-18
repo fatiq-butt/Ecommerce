@@ -4,16 +4,24 @@ class CheckoutController < ApplicationController
 
   def index
     @line_items = current_user.cart.line_items
-    @total_price = current_user.cart.calculate_total_price(params[:coupon_code])
-    
+    @coupon = Coupon.find_by name: params[:coupon_code]
+    @total_price = current_user.cart.calculate_total_price(@coupon)
+
     respond_to do |format|
       format.js
       format.html
     end
   end
 
+  def create_order
+    @coupon = Coupon.find_by name: params[:coupon_code]
+    @total_price = current_user.cart.calculate_total_price(@coupon)
+    @disconted_price = current_user.cart.calculate_total_price(@coupon)
+    Order.create_order(current_user, @total_price, @disconted_price, @coupon)
+  end
+
   def confirmation
-    Order.create_order(current_user)
+    current_user.orders.last.confrimed_order()
   end
 
   private

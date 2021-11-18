@@ -86,7 +86,11 @@ ActiveRecord::Schema.define(version: 2021_11_17_072409) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "coupon_id", null: false
+    t.bigint "coupon_id"
+    t.float "total_price"
+    t.float "discounted_total"
+    t.boolean "confirmed", default: false
+    t.string "payment_method"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
