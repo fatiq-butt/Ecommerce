@@ -1,7 +1,7 @@
 class CheckoutController < ApplicationController
   before_action :authenticate_user!
   before_action :set_states, :set_cities, only: [:index]  
-  after_action :place_order, only: [:create]
+
   def index
     @line_items = current_user.cart.line_items
     @coupon = Coupon.find_by name: params[:coupon_code]
@@ -28,7 +28,7 @@ class CheckoutController < ApplicationController
         payment_method_types: ['card'],
         line_items: @line_items,
         mode: 'payment',
-        success_url: "http://localhost:3000/",
+        success_url: "http://localhost:3000/checkout/successful",
         cancel_url: "http://localhost:3000/",
       })
     respond_to do |format|
@@ -39,16 +39,17 @@ class CheckoutController < ApplicationController
   def confirmation
     if params[:payment_method] != "card"
       current_user.orders.last.confrimed_order()
+      respond_to do |format|
+        format.js {redirect_to order_successful_path}
+      end
     end
   end
 
-  private
-
-  def place_order
-    byebug
+  def successful_order
     current_user.orders.last.confrimed_order()
-    redirect_to root_path
   end
+
+  private
 
   def set_states
     if params[:country] && params[:state].nil?

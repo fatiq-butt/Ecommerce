@@ -66,7 +66,7 @@
                 <%= form_with url: place_order_path, method: :post, local: false do |f| %>
                   <div class="form-check">
                     <%= f.radio_button :payment_method, "check", class: 'form-check-input' %>
-                    <%= f.label :payment_method, "check",class: 'form-check-label'  %>
+                    <%= f.label :payment_method, "check", class: 'form-check-label'  %>
                   </div>
                   <div class="form-check">
                     <%= f.radio_button :payment_method, "cash", class: 'form-check-input' %>
@@ -78,16 +78,6 @@
                   </div>
                   <%= f.submit 'checkout now', class: "btn btn-primary mb-2 mt-2", id: "final_checkout_btn" %>
                 <% end %>
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-              <button class="accordion-button collapsed" id="confirmation_collapse_btn" type="button" data-bs-toggle="collapse"  aria-expanded="false" aria-controls="collapseFour">Confirmation</button>
-            </h2>
-            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-              <div class="accordion-body customer_information_form">
-                <strong>Your order has been placed...</strong>
               </div>
             </div>
           </div>
