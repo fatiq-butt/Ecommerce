@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :products
-  resources :checkout, only: [:index]
+  resources :checkout, only: [:index,:create]
   resources :users, only: [:update]
 
   get 'cart', to: "carts#show", as: "cart"
@@ -27,4 +27,5 @@ Rails.application.routes.draw do
   delete 'line_items/:id', to: "line_items#destroy"
   post 'checkout/confirmation', to: "checkout#confirmation", as: "place_order"
   post 'checkout/create_order', to: "checkout#create_order", as: "create_order"
+  post 'checkout/place_order', to: "checkout#place_order", as: "order_placed"
 end

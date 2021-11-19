@@ -58,4 +58,3 @@ gem 'pagy'
 gem 'pg_search'
 gem 'city-state'
 gem 'stripe'
-gem 'dotenv-rails', :groups => [:development, :test]
