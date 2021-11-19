@@ -1,12 +1,13 @@
-<% orders.products.each do |product| %>
+<% order.receipts.each do |receipt| %>
   <tr>
-    <td><%= orders.user.id %></td>
-    <td><%= orders.user.first_name %></td>
-    <td><%= orders.user.company_name %></td>
-    <td><%= orders.user.email %></td>
-    <td><%= orders.user.phone %></td>
-    <td><%= orders.receipts.first.quantity %></td>
-    <td><%= product.title %></td>
-    <td><%= product.category.name %></td>
+    <td><%= order.user.id %></td>
+    <td><%= order.user.first_name %></td>
+    <td><%= order.user.company_name %></td>
+    <td><%= order.user.email %></td>
+    <td><%= order.user.phone %></td>
+    <td><%= receipt.quantity %></td>
+    <td><%= receipt.product.title %></td>
+    <td><%= receipt.product.category.name %></td>
   </tr>
 <% end %>
+
