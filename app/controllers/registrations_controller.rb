@@ -12,8 +12,10 @@ class RegistrationsController < Devise::RegistrationsController
     resource.save
     respond_to do |format|
       format.js do
+        yield resource if block_given?
         if resource.persisted?
           if resource.active_for_authentication?
+            byebug
             set_flash_message! :notice, :signed_up
             sign_up(resource_name, resource)
             respond_with resource, location: after_inactive_sign_up_path_for(resource)
