@@ -4,7 +4,7 @@
   <td><%= users.last_name %></td>
   <td><%= users.email %></td>
   <td>
-    <%= link_to "Delete" , admin_user_path(users), method: :delete, data: {confirm: "Are you sure?",remote: true } , class: "btn btn-danger"  %>
-    <%= link_to "Edit" , admin_user_path(users), method: :delete, data: {confirm: "Are you sure?",remote: true } , class: "btn btn-primary"  %>
+    <%= link_to "Delete", admin_user_path(users), method: :delete, data: {confirm: "Are you sure?", remote: true }, class: "btn btn-danger"  %>
+    <%= link_to "Edit", admin_user_path(users), method: :delete, data: {confirm: "Are you sure?", remote: true }, class: "btn btn-primary"  %>
   </td>
 </tr>

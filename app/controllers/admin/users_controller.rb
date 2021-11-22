@@ -3,9 +3,9 @@ class Admin::UsersController < AdminController
 
   def index
     if params[:search].present?
-      @pagy, @users = pagy(User.where(:role => 'user').global_search(params[:search]), items: 5)  
+      @pagy, @users = pagy(User.where(role: 'user').global_search(params[:search]), items: 5)
     else
-      @pagy, @users = pagy(User.where(:role => 'user'), items: 5)
+      @pagy, @users = pagy(User.where(role: 'user'), items: 5)
     end  
   end
 
