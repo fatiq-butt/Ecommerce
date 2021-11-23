@@ -12,7 +12,6 @@ class Admin::UsersController < AdminController
       format.html
       format.csv { send_data CsvGenerationService.new('User').call(), filename: "users-#{Date.today}.csv" }
     end
-    
   end
 
   def destroy
