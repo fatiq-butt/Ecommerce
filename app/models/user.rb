@@ -5,7 +5,6 @@ class User < ApplicationRecord
 
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
 
-  ATTRIBUTES = [:id, :email, :first_name, :last_name, :role]
   ROLES = [:user, :admin].freeze
   enum role: ROLES, _default: :user
 
@@ -13,6 +12,10 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   private
+
+  def self.attributes
+    [:id, :email, :first_name, :last_name, :role]
+  end
 
   def password_validation
     rules = {
