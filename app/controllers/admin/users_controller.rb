@@ -1,5 +1,4 @@
 class Admin::UsersController < AdminController
-  include CsvConcern
 
   before_action :authenticate_user!
   before_action :find_user, only: %i[show edit update destroy]
