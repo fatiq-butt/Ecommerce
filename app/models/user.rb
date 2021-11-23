@@ -9,6 +9,7 @@ class User < ApplicationRecord
   USER = :user
   ADMIN = :admin
   ROLES = [USER, ADMIN]
+  ATTRIBUTES = [:id, :email, :first_name, :last_name, :role]
   enum role: ROLES
 
   validates :first_name, :last_name, presence: true
@@ -18,20 +19,6 @@ class User < ApplicationRecord
 
   def set_default_role
     self.role ||= :user
-  end
-
-  def self.to_csv
-    attributes = %w{id name email}
-    CSV.generate(headers: true) do |csv|
-      csv << attributes
-      all.each do |user|
-        csv << attributes.map{ |attr| user.send(attr) }
-      end
-    end
-  end
-
-  def name
-    "#{first_name} #{last_name}"
   end
 
   def password_validation

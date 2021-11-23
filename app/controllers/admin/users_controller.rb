@@ -1,6 +1,8 @@
 class Admin::UsersController < AdminController
   before_action :set_user, only: %i[ show edit update destroy ] 
 
+  include CsvConcern
+
   def index
     if params[:search].present?
       @pagy, @users = pagy(User.where(:role => 'user').global_search(params[:search]), items: 5)  
@@ -11,7 +13,7 @@ class Admin::UsersController < AdminController
     respond_to do |format|
       format.html
       format.js
-      format.csv { send_data User.all.to_csv, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data generate_csv('User', User::ATTRIBUTES), filename: "users-#{Date.today}.csv" }
     end
     
   end
