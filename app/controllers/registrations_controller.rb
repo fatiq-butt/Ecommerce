@@ -5,7 +5,7 @@ class RegistrationsController < Devise::RegistrationsController
       format.js
     end    
   end  
-  
+
   def create
     build_resource(sign_up_params)
     resource.save

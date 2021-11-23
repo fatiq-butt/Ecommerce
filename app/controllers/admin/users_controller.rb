@@ -6,6 +6,11 @@ class Admin::UsersController < AdminController
     users = User.user
     users = users.global_search(params[:search]) if params[:search].present?
     @pagy, @users = pagy(users, items: 5)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data CsvGenerationService.new('User').call, filename: "users-#{Date.today}.csv" }
+    end
   end
 
   def destroy

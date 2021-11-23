@@ -11,6 +11,10 @@ class User < ApplicationRecord
   validate :password_validation
   validates :first_name, :last_name, presence: true
 
+  def self.csv_attributes
+    [:id, :email, :first_name, :last_name, :role]
+  end
+
   private
 
   def password_validation
