@@ -1,5 +1,12 @@
 class User < ApplicationRecord
+  include PgSearch::Model
+
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable, :confirmable
+
+  pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
+
+  ROLES = [:user, :admin].freeze
+  enum role: ROLES, _default: :user
 
   validate :password_validation
   validates :first_name, :last_name, presence: true
