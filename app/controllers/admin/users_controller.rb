@@ -3,12 +3,12 @@ class Admin::UsersController < AdminController
   before_action :find_user, only: %i[show edit update destroy]
 
   def index
-    @users = User.user
     if params[:search].present?
-      @pagy, @users = pagy(@users.global_search(params[:search]), items: 5)
+      @users = User.user.global_search(params[:search])
     else
-      @pagy, @users = pagy(@users, items: 5)
+      @users = User.user
     end  
+    @pagy, @users = pagy(@users, items: 5)
   end
 
   def destroy
