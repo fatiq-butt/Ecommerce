@@ -1,5 +1,4 @@
 class Admin::UsersController < AdminController
-
   before_action :authenticate_user!
   before_action :find_user, only: %i[show edit update destroy]
 
@@ -10,7 +9,7 @@ class Admin::UsersController < AdminController
 
     respond_to do |format|
       format.html
-      format.csv { send_data CsvGenerationService.new('User').call(), filename: "users-#{Date.today}.csv" }
+      format.csv { send_data CsvGenerationService.new('User').call, filename: "users-#{Date.today}.csv" }
     end
   end
 

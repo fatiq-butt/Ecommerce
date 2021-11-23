@@ -3,7 +3,7 @@ require 'csv'
 class CsvGenerationService
   def initialize(model)
     @model = model.constantize
-    @attributes = @model.attributes
+    @attributes = @model.csv_attributes
   end
 
   def call
