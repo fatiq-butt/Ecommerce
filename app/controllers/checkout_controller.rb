@@ -23,7 +23,6 @@ class CheckoutController < ApplicationController
   def create
 
     @line_items = current_user.cart.line_items_details(current_user.orders.last.coupon)
-    byebug
     @session = Stripe::Checkout::Session.create({
         payment_method_types: ['card'],
         line_items: @line_items,
@@ -31,6 +30,7 @@ class CheckoutController < ApplicationController
         success_url: "http://localhost:3000/checkout/successful",
         cancel_url: "http://localhost:3000/",
       })
+
     respond_to do |format|
       format.js
     end
