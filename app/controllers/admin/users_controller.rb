@@ -1,25 +1,26 @@
 class Admin::UsersController < AdminController
   before_action :authenticate_user!
-  before_action :set_user, only: %i[ show edit update destroy ] 
+  before_action :find_user, only: %i[show edit update destroy]
 
   def index
+    @users = User.user
     if params[:search].present?
-      @pagy, @users = pagy(User.where(role: 'user').global_search(params[:search]), items: 5)
+      @pagy, @users = pagy(@users.global_search(params[:search]), items: 5)
     else
-      @pagy, @users = pagy(User.where(role: 'user'), items: 5)
+      @pagy, @users = pagy(@users, items: 5)
     end  
   end
 
   def destroy
+    @user.destroy
     respond_to do |format|
-      @user.destroy
       format.js
     end  
   end
 
   private 
 
-  def set_user
+  def find_user
     @user = User.find(params[:id])
   end  
 end
