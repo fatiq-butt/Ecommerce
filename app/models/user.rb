@@ -1,27 +1,21 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
-  before_update :check_password_changed
+  include PgSearch::Model
 
-  USER = :user
-  ADMIN = :admin
-  ROLES = [USER, ADMIN]
-  enum role: ROLES
-  
-  PASSWORD_REGEX = /(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}/
-  SPECIAL_CHAR = ["+", "-", "&&", "||", "!", "(", ")", "{", "}", "[", "]", "^","~", "*", "?", ":"]
+  devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable, :confirmable
 
-  after_initialize :set_default_role, if: :new_record?
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :password, format: {
-    with: PASSWORD_REGEX, 
-    message: "should be atleast 8 characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like !*?$%^&)."},
-    if: :password_validation
+  pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
+
+  SPECIAL_CHAR = ["+", "-", "&&", "||", "!", "(", ")", "{", "}", "[", "]", "^","~", "*", "?", ":"].freeze
+  ROLES = [:user, :admin].freeze
+  enum role: ROLES, _default: :user
+
+  validate :password_validation, if: :password_changed
+  validates :first_name, :last_name, presence: true
 
   private
 
-  def set_default_role
-    self.role ||= :user
+  def self.csv_attributes
+    [:id, :email, :first_name, :last_name, :role]
   end
 
   def check_password_changed
@@ -30,11 +24,23 @@ class User < ApplicationRecord
     end
   end
 
-  def password_validation
+  def password_changed
     new_record? || encrypted_password_changed?
   end
 
   def self.generate_random_password
     SecureRandom.alphanumeric + SPECIAL_CHAR.sample(2).join
+  end
+
+  def password_validation
+    rules = {
+      'must contain at least one lowercase letter'  => /[a-z]+/,
+      'must contain at least one uppercase letter'  => /[A-Z]+/,
+      'must contain at least one digit'             => /\d+/,
+      'must contain at least one special character' => /[^A-Za-z0-9]+/
+    }
+    rules.each do |message, regex|
+      errors.add :password, message unless password.match(regex)
+    end
   end
 end

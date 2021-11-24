@@ -1,6 +1,6 @@
-$( document ).ready(function() {
-  if ($("#errors")[0] !== undefined)
+$(document).on('turbolinks:load', function () { 
+  if ($("#sign_up_link.errors").length > 0)
   {
-    $("#errors")[0].click()
+    $("#sign_up_link.errors")[0].click()
   }
 });
