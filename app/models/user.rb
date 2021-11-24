@@ -11,6 +11,8 @@ class User < ApplicationRecord
   validate :password_validation, if: :password_changed
   validates :first_name, :last_name, presence: true
 
+  private
+
   def self.csv_attributes
     [:id, :email, :first_name, :last_name, :role]
   end
@@ -18,8 +20,6 @@ class User < ApplicationRecord
   def password_changed
     new_record? || encrypted_password_changed?
   end
-
-  private
 
   def password_validation
     rules = {
