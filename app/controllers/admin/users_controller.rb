@@ -13,10 +13,11 @@ class Admin::UsersController < AdminController
     end
   end
 
-  def show;end
+  def show; end
 
   def destroy
     @user.destroy
+
     respond_to do |format|
       format.js
     end  
