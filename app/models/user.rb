@@ -8,7 +8,7 @@ class User < ApplicationRecord
   ROLES = [:user, :admin].freeze
   enum role: ROLES, _default: :user
 
-  validate :password_validation, if: :password_changed
+  validate :password_validation, if: :password_changed?
   validates :first_name, :last_name, presence: true
 
   private
@@ -17,7 +17,7 @@ class User < ApplicationRecord
     [:id, :email, :first_name, :last_name, :role]
   end
 
-  def password_changed
+  def password_changed?
     new_record? || encrypted_password_changed?
   end
 
