@@ -5,10 +5,12 @@ class Admin::UsersController < AdminController
   def index
     users = User.user
     users = users.global_search(params[:search]) if params[:search].present?
+    users = users.order(params[:sort] => params[:order]) if params[:order].present?
     @pagy, @users = pagy(users, items: 5)
 
     respond_to do |format|
       format.html
+      format.js
       format.csv { send_data CsvGenerationService.new('User').call, filename: "users-#{Date.today}.csv" }
     end
   end

@@ -28,5 +28,4 @@ class User < ApplicationRecord
       errors.add :password, message unless password.match(regex)
     end
   end
->>>>>>> main
 end

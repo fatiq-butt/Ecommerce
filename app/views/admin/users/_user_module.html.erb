@@ -4,25 +4,25 @@
       <tr>
 
         <th scope="col">ID
-          <%= link_to  sort: :id, order: sorting_method[:order], remote: true do %>
+          <%= link_to  sort: :id, order: sorting_method("id"), remote: true do %>
             <i class="fas fa-sort"></i>
           <% end %>
         </th>
 
         <th scope="col">First Name 
-          <%= link_to sort: :first_name, order: sorting_method[:order], remote: true  do %>
+          <%= link_to sort: :first_name, order: sorting_method("first_name"), remote: true  do %>
             <i class="fas fa-sort"></i>
           <% end %>
         </th>
 
         <th scope="col">Last Name
-          <%= link_to sort: :last_name, order: sorting_method[:order], remote: true  do %>
+          <%= link_to sort: :last_name, order: sorting_method("last_name"), remote: true  do %>
             <i class="fas fa-sort"></i>
           <% end %>
         </th>
 
         <th scope="col">Email
-          <%= link_to sort: :email, order: sorting_method[:order], remote: true do %>
+          <%= link_to sort: :email, order: sorting_method("email"), remote: true do %>
             <i class="fas fa-sort"></i>
           <% end %>
         </th>
