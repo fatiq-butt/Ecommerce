@@ -1,8 +1,7 @@
 class Admin::UsersController < AdminController
   before_action :authenticate_user!
   before_action :find_user, only: %i[show edit update destroy]
-  before_action :params_for_update, only: :update
-  
+
   def index
     users = User.user
     users = users.global_search(params[:search]) if params[:search].present?
@@ -13,7 +12,7 @@ class Admin::UsersController < AdminController
       format.html
       format.js
       format.csv { send_data CsvGenerationService.new('User').call, filename: "users-#{Date.today}.csv" }
-    end   
+    end
   end
 
   def show; end
@@ -44,13 +43,7 @@ class Admin::UsersController < AdminController
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
 
-  def params_for_update
-    params.require(:user).permit(:first_name, :last_name, :password, :password_confirmation)
-  end
-
   def find_user
     @user = User.find(params[:id])
   end  
 end
-
-

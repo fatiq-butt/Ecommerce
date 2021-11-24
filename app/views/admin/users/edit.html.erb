@@ -16,17 +16,19 @@
             <div id="card-edit" class="card">
               <div class="card-body">
                 <div class="row">
+
                   <%= form_for(:user, url: admin_user_path(@user), html: { method: :put }) do |f| %>
                     <div class="form-group">
                       <%= f.label :first_name, "First Name: "%>
                       <%= f.text_field :first_name, class: "form-control" %><br>
                     </div>
+                    <div class="form-group">
                       <%= f.label :last_name, "Last Name: "%>
                       <%= f.text_field :last_name, class: "form-control" %><br>
                     </div>   
                     <div class="form-group">
                       <%= f.label :email, "Email :" %>
-                      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", readonly: true%><br>
+                      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", readonly: true %><br>
                     </div>
                     <div class="form-group">
                       <%= f.label :password, "New Password :" %><i>(leave blank if you don't want to change it)</i>
@@ -39,11 +41,13 @@
                     </div>  
                     <%= f.submit "update", class:"btn btn-primary" %>
                   <% end %>
+
                   <%= link_to "Back", admin_users_path, class: "btn btn-primary"%>
                 </div>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
