@@ -1,12 +1,12 @@
-<section class="vh-100 signup-background">
+<section class="vh-100 back-ground">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+        <div class="card shadow-2-strong">
           <div class="card-body p-5 text-center">
             <h3 class="mb-5">Change your password</h3>
             <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-              <%= render "devise/shared/error_messages",resource: resource %>
+              <%= render "devise/shared/error_messages", resource: resource %>
               <%= f.hidden_field :reset_password_token %>
               <div class="form-outline mb-4">
                 <%= f.label :password, "New password", class: "form-label" %><br />

@@ -1,5 +1,4 @@
 module UsersHelper
-
   def sorting_method(column)
     if(params[:sort] == column && params[:order] == "ASC")
       "DESC"

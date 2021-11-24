@@ -1,4 +1,4 @@
-<div class="user-module">
+<div class="user_listing">
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -6,25 +6,25 @@
         <th scope="col">ID
           <%= link_to  sort: :id, order: sorting_method("id"), remote: true do %>
             <i class="fas fa-sort"></i>
-          <%end%>
+          <% end %>
         </th>
 
         <th scope="col">First Name 
           <%= link_to sort: :first_name, order: sorting_method("first_name"), remote: true  do %>
             <i class="fas fa-sort"></i>
-          <%end%>  
+          <% end %>
         </th>
 
         <th scope="col">Last Name
           <%= link_to sort: :last_name, order: sorting_method("last_name"), remote: true  do %>
             <i class="fas fa-sort"></i>
-          <%end%>
+          <% end %>
         </th>
 
         <th scope="col">Email
           <%= link_to sort: :email, order: sorting_method("email"), remote: true do %>
             <i class="fas fa-sort"></i>
-          <%end%>
+          <% end %>
         </th>
 
         <th scope="col">Actions</th>
@@ -37,5 +37,4 @@
 
   <p><%= link_to("Generate Report", admin_users_path(format: :csv), class: "btn btn-primary") %></p>
   <%= pagy_bootstrap_nav(@pagy).html_safe %>
-  
 </div>

@@ -1,2 +1,1 @@
-$($(".vh-150")[1]).removeClass("d-none");
-$($(".vh-150")[1]).html("<%= j render 'devise/shared/signup_form' , @resource %>")
+$("#sign_up_form_section").removeClass("d-none").html("<%= j render 'devise/registrations/signup_form' , @resource %>");

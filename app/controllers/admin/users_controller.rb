@@ -1,26 +1,24 @@
 class Admin::UsersController < AdminController
-  before_action :set_user, only: %i[ show edit update destroy ] 
+  before_action :authenticate_user!
+  before_action :find_user, only: %i[show edit update destroy]
   before_action :params_for_update, only: :update
   
   def index
-    if params[:order].present?
-        @pagy, @users = pagy(User.where(role:'user').order(params[:sort] => params[:order]), items: 5)
-    elsif params[:search].present?
-        @pagy, @users = pagy(User.where(role: 'user').global_search(params[:search]), items: 5)
-    else
-      @pagy, @users = pagy(User.where(role:'user'), items: 5)
-    end
+    users = User.user
+    users = users.global_search(params[:search]) if params[:search].present?
+    users = users.order(params[:sort] => params[:order]) if params[:order].present?
+    @pagy, @users = pagy(users, items: 5)
 
     respond_to do |format|
       format.html
       format.js
-      format.csv { send_data User.all.to_csv, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data CsvGenerationService.new('User').call, filename: "users-#{Date.today}.csv" }
     end   
   end
 
-  def show;end
+  def show; end
 
-  def edit;end
+  def edit; end
 
   def update
     if @user.update(user_params)
@@ -33,8 +31,9 @@ class Admin::UsersController < AdminController
   end
 
   def destroy
+    @user.destroy
+
     respond_to do |format|
-      @user.destroy
       format.js
     end  
   end
@@ -49,7 +48,9 @@ class Admin::UsersController < AdminController
     params.require(:user).permit(:first_name, :last_name, :password, :password_confirmation)
   end
 
-  def set_user
+  def find_user
     @user = User.find(params[:id])
   end  
 end
+
+
