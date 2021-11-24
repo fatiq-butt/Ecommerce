@@ -4,27 +4,27 @@
       <tr>
 
         <th scope="col">ID
-          <%= link_to  sort: :id, order: sorting_method[:order] ,remote: true do %>
+          <%= link_to  sort: :id, order: sorting_method[:order], remote: true do %>
             <i class="fas fa-sort"></i>
-          <%end%>
+          <% end %>
         </th>
 
         <th scope="col">First Name 
-          <%= link_to sort: :first_name, order: sorting_method[:order] ,remote: true  do %>
+          <%= link_to sort: :first_name, order: sorting_method[:order], remote: true  do %>
             <i class="fas fa-sort"></i>
-          <%end%>  
+          <% end %>
         </th>
 
         <th scope="col">Last Name
-          <%= link_to sort: :last_name, order: sorting_method[:order] ,remote: true  do %>
+          <%= link_to sort: :last_name, order: sorting_method[:order], remote: true  do %>
             <i class="fas fa-sort"></i>
-          <%end%>
+          <% end %>
         </th>
 
         <th scope="col">Email
-          <%= link_to sort: :email, order: sorting_method[:order] ,remote: true do %>
+          <%= link_to sort: :email, order: sorting_method[:order], remote: true do %>
             <i class="fas fa-sort"></i>
-          <%end%>
+          <% end %>
         </th>
 
         <th scope="col">Actions</th>
@@ -35,7 +35,6 @@
     </tbody>
   </table>
 
-  <p><%= link_to("Generate Report", admin_users_path(format: :csv), class: "btn btn-primary",) %></p>
+  <p><%= link_to("Generate Report", admin_users_path(format: :csv), class: "btn btn-primary") %></p>
   <%= pagy_bootstrap_nav(@pagy).html_safe %>
-  
 </div>

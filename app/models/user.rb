@@ -1,34 +1,32 @@
-require 'csv'
 class User < ApplicationRecord
   include PgSearch::Model
-  pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: {tsearch: {prefix: true}}
- 
-  USER = :user
-  ADMIN = :admin
-  ROLES = [USER, ADMIN]
-  enum role: ROLES
 
-  after_initialize :set_default_role, if: :new_record?
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :password, format: {with: /(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}/, message: "The password should be atleast 8 characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like !*?$%^&)."}
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
+  devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable, :confirmable
 
-  def set_default_role
-    self.role ||= :user
+  pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
+
+  ROLES = [:user, :admin].freeze
+  enum role: ROLES, _default: :user
+
+  validate :password_validation
+  validates :first_name, :last_name, presence: true
+
+  def self.csv_attributes
+    [:id, :email, :first_name, :last_name, :role]
   end
-  
-  def self.to_csv
-    attributes = %w{id name email}    
-    CSV.generate(headers: true) do |csv|
-      csv << attributes
-      all.each do |user|
-        csv << attributes.map{ |attr| user.send(attr) }
-      end
+
+  private
+
+  def password_validation
+    rules = {
+      'must contain at least one lowercase letter'  => /[a-z]+/,
+      'must contain at least one uppercase letter'  => /[A-Z]+/,
+      'must contain at least one digit'             => /\d+/,
+      'must contain at least one special character' => /[^A-Za-z0-9]+/
+    }
+    rules.each do |message, regex|
+      errors.add :password, message unless password.match(regex)
     end
   end
-
-  def name
-    "#{first_name} #{last_name}"
-  end
+>>>>>>> main
 end
