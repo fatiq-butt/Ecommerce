@@ -6,13 +6,11 @@
           <div class="row">
             <div class="col-lg-12">
 
-              <% if resource.errors.present? %>
+              <% if @user.errors.present? %>
                 <div class="container">
-                  <div class="alert alert-danger" role="alert">
-                    <ul>
-                      <%= render "devise/shared/error_messages", resource: resource %>
-                    </ul>
-                  </div>
+                  <ul>
+                    <%= render "devise/shared/error_messages", resource: resource %>
+                  </ul>
                 </div>
               <% end %>
 

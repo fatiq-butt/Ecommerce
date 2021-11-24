@@ -24,7 +24,6 @@ class Admin::UsersController < AdminController
       flash[:notice] = "User Updated Successfully.."
       redirect_to admin_users_path
     else
-      flash[:errors] =  @user.errors.full_messages
       render 'edit'
     end
   end

@@ -3,7 +3,6 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
-          <%= render '/devise/shared/error_messages', resource: @user %>
           <div class="row">
             <div class="col-lg-6">
               <h2> Update User </h2>
@@ -11,12 +10,18 @@
             <hr></hr>
           </div>
         </div>
+        <% if @user.errors.present? %>
+          <div class="container">
+            <ul>
+              <%= render "devise/shared/error_messages", resource: @user %>
+            </ul>
+          </div>
+        <% end %>
         <div class="row">
           <div class="container">
             <div id="card-edit" class="card">
               <div class="card-body">
                 <div class="row">
-
                   <%= form_for(:user, url: admin_user_path(@user), html: { method: :put }) do |f| %>
                     <div class="form-group">
                       <%= f.label :first_name, "First Name: "%>
@@ -38,11 +43,12 @@
                     <div class="form-group">
                       <%= f.label :password_confirmation, "Confirm New Password :" %>
                       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %><br>
-                    </div>  
-                    <%= f.submit "update", class:"btn btn-primary" %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.submit "update", class:"btn btn-primary" %>
+                      <%= link_to "Back", admin_users_path, class: "btn btn-primary"%>
+                    </div>
                   <% end %>
-
-                  <%= link_to "Back", admin_users_path, class: "btn btn-primary"%>
                 </div>
               </div>
             </div>
