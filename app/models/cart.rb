@@ -14,13 +14,10 @@ class Cart < ApplicationRecord
   end
 
   def line_items_details(coupon)
-    check = true
-
-    @discount_price = coupon.discount/100
     self.line_items.map do |line_item|
-      if line_item.product.coupons.include?(coupon) && check
+      if line_item.product.coupons.include?(coupon)
         check = false
-        {name: line_item.product.title, amount: ((line_item.product.price - (line_item.product.price * @discount_price))*100).to_i, currency: "usd", quantity: line_item.quantity}
+        {name: line_item.product.title, amount: ((line_item.product.price - (line_item.product.price * (coupon.discount/100)))*100).to_i, currency: "usd", quantity: line_item.quantity}
       else
         {name:line_item.product.title, amount: (line_item.product.price*100).to_i, currency: "usd", quantity: line_item.quantity}
       end
