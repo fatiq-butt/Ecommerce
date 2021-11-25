@@ -21,11 +21,13 @@
             </div>
             <div class="col-lg-3">
               <div class="input-group">
-                <%= link_to "Add New +", new_admin_product_path,class: "btn btn-primary" %> 
+                <%= link_to "Add New +", new_admin_product_path, class: "btn btn-primary" %>
               </div>
             </div>  
           <hr></hr>
-           <%= render partial: 'product_module' %>
+          <div id="product_listing_table">
+            <%= render partial: 'product_table' %>
+          </div>
         </div>
       </div>
     </div>

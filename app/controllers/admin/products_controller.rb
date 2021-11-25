@@ -32,7 +32,7 @@ class Admin::ProductsController < AdminController
   def edit; end
 
   def destroy
-    @product.destroy
+    # @product.destroy
 
     respond_to do |format|
       format.js

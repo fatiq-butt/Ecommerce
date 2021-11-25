@@ -5,13 +5,14 @@
   <td><%= products.status %></td>
   <td>
     <%= link_to "Show", admin_product_path(products), class: "btn btn-primary"  %>
-      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_product_<%= products.id %>">
         Delete
       </button>
     <%= link_to "Edit", edit_admin_product_path(products), class: "btn btn-primary" %>
   </td>
 </tr>
-<div class="modal" id="myModal">
+
+<div class="modal" id="modal_product_<%= products.id %>">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -22,7 +23,8 @@
         Are you sure? You want to delete this user..
       </div>
       <div class="modal-footer">
-        <%= link_to "Delete", admin_product_path(products), method: :delete, class: "btn btn-danger","data-bs-dismiss" =>"modal", remote: true %>
+        <%= link_to "Delete", admin_product_path(products), method: :delete, class: "btn btn-danger", data: { bs_dismiss: :modal }, remote: true %>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
       </div>
     </div>
   </div>
