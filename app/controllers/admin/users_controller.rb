@@ -45,7 +45,7 @@ class Admin::UsersController < AdminController
     @user.set_user_invitation(@password)
     if @user.save
       InviteMailer.with(user: @user, password: @password).invite_created.deliver_now
-      redirect_to admin_users_path , notice: "Invite email sent successfully"
+      redirect_to admin_users_path, notice: "Invite email sent successfully"
     end
   end
 
