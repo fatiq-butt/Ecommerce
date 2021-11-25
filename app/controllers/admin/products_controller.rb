@@ -41,7 +41,7 @@ class Admin::ProductsController < AdminController
 
   def update
     if @product.update(product_params)
-      flash[:notice] = "Product Updated Successfully.."
+      flash[:notice] = "Product Updated Successfully."
       redirect_to admin_products_path
     else
       render 'edit'
