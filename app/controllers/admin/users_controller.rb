@@ -17,6 +17,16 @@ class Admin::UsersController < AdminController
 
   def show; end
 
+  def edit; end
+
+  def update
+    if @user.update(user_params)
+      redirect_to admin_users_path, notice: "User Updated Successfully."
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @user.destroy
 
@@ -32,10 +42,7 @@ class Admin::UsersController < AdminController
   def create
     @user = User.new(user_params)
     @password = User.generate_random_password
-    @user.password = @password
-    @user.password_confirmation = @password
-    @user.invited_user = true
-    @user.skip_confirmation!    
+    @user.set_user_invitation(@password)
     if @user.save
       InviteMailer.with(user: @user, password: @password).invite_created.deliver_now
       redirect_to admin_users_path , notice: "Invite email sent successfully"
@@ -43,6 +50,10 @@ class Admin::UsersController < AdminController
   end
 
   private 
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
 
   def find_user
     @user = User.find(params[:id])
