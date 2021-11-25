@@ -1,7 +1,7 @@
 <tr id="product_<%= products.id %>">
   <td><%= products.id %></td>
   <td><%= products.title %></td>
-  <td>$ <%= products.price %></td>
+  <td><%= currency_price(products.price) %></td>
   <td><%= products.status %></td>
   <td>
     <%= link_to "Show", admin_product_path(products), class: "btn btn-primary"  %>
