@@ -2,7 +2,7 @@ class User < ApplicationRecord
   include PgSearch::Model
 
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable, :confirmable
-  before_update :set_invite_user
+  before_update :set_invite_user_field
 
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
 
@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validate :password_validation, if: :password_changed?
   validates :first_name, :last_name, presence: true
 
-  def set_user_invite(password)
+  def set_user_invitation(password)
     self.password = password
     self.password_confirmation = password
     self.invited_user = true
@@ -26,7 +26,7 @@ class User < ApplicationRecord
     [:id, :email, :first_name, :last_name, :role]
   end
 
-  def set_invite_user
+  def set_invite_user_field
     if encrypted_password_changed?
       self.invited_user = false
     end
