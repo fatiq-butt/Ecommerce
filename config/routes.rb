@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {registrations: "registrations"}
 
+  root to: 'main#index'
+
   devise_scope :user do
     get 'profile', to: 'registrations#show'
     get 'profile/edit', to: 'registrations#edit'
@@ -8,8 +10,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    resources :products
   end
-
-  root to: 'main#index'
-  get '/users', to: redirect('users/sign_in')
 end

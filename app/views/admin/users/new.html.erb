@@ -23,7 +23,7 @@
               <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class:"form-control form-control-lg" %>
             </div>
             <div class="form-outline mb-4">
-              <%= f.label :query, "Role:" %>
+              <%= f.label :role, "Role:" %>
               <%= f.select :role, ["user"] %>
             </div>
             <%= f.submit "Invite", class: "btn btn-primary btn-lg btn-block" %>
