@@ -23,13 +23,10 @@ class CheckoutController < ApplicationController
   def create
 
     @line_items = current_user.cart.line_items_details(current_user.orders.last.coupon)
-    @session = Stripe::Checkout::Session.create({
-        payment_method_types: ['card'],
-        line_items: @line_items,
-        mode: 'payment',
-        success_url: "http://localhost:3000/checkout/successful",
-        cancel_url: "http://localhost:3000/",
-      })
+    byebug
+    @order = current_user.orders.last
+    result = PlaceOrder.call(items: @line_items, order: @order, cart_line_items: current_user.cart.line_items)
+
 
     respond_to do |format|
       format.js

@@ -11,10 +11,13 @@ class Order < ApplicationRecord
   end
 
   def confrimed_order
-    user.cart.line_items.each do |line_item|
+    self.update(confirmed: true)
+  end
+
+  def gnerate_receipt(line_items)
+    line_items.each do |line_item|
       self.receipts.create(product: line_item.product, quantity: line_item.quantity)
       line_item.destroy
-    self.update(confirmed: true)
     end
   end
 end
