@@ -8,14 +8,18 @@ class User < ApplicationRecord
   ROLES = [:user, :admin].freeze
   enum role: ROLES, _default: :user
 
-  validate :password_validation
+  validate :password_validation, if: :password_changed?
   validates :first_name, :last_name, presence: true
+
+  private
 
   def self.csv_attributes
     [:id, :email, :first_name, :last_name, :role]
   end
 
-  private
+  def password_changed?
+    new_record? || encrypted_password_changed?
+  end
 
   def password_validation
     rules = {

@@ -17,6 +17,16 @@ class Admin::UsersController < AdminController
 
   def show; end
 
+  def edit; end
+
+  def update
+    if @user.update(user_params)
+      redirect_to admin_users_path, notice: "User Updated Successfully."
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @user.destroy
 
@@ -26,6 +36,10 @@ class Admin::UsersController < AdminController
   end
 
   private 
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
 
   def find_user
     @user = User.find(params[:id])
