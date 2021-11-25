@@ -1,21 +1,18 @@
-require 'csv'
 class Product < ApplicationRecord
-  has_and_belongs_to_many :coupons
-  has_many_attached :images 
-  belongs_to :category
-
   include PgSearch::Model
 
-  STATUS = ["Publish", "Draft", "Pending"]
+  has_and_belongs_to_many :coupons
+  has_many_attached :images, dependent: :destroy
+  belongs_to :category
 
-  pg_search_scope :global_product_search, against: [:id, :title, :price, :description, :status], using: {tsearch: {prefix: true}}
-  
-  validates :price, numericality: {only_integer: false}, presence: true 
+  pg_search_scope :global_product_search, against: [:id, :title, :price, :description, :status], using: { tsearch: { prefix: true } }
+
+  STATUSES = ["Publish", "Draft", "Pending"].freeze
+
+  validates :price, numericality: true, presence: true
   validates :title, :description, :status, :images, presence: true 
 
-  private
-  
-  def self.generate_csv
-    CsvFormat.to_csv(self,"id", "title", "price", "description", "status")
+  def self.csv_attributes
+    [:id, :title, :price, :status]
   end
 end
