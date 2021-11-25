@@ -7,7 +7,7 @@ class Product < ApplicationRecord
 
   STATUS = ["Publish", "Draft", "Pending"].freeze
 
-  validates :price, numericality: { only_integer: false }, presence: true
+  validates :price, numericality: true, presence: true
   validates :title, :description, :status, :images, presence: true 
 
   def self.csv_attributes
