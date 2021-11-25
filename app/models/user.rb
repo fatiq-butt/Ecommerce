@@ -2,16 +2,23 @@ class User < ApplicationRecord
   include PgSearch::Model
 
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable, :confirmable
-  before_update :check_password_changed
+  before_update :set_invite_user
 
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
 
-  SPECIAL_CHAR = ["+", "-", "&&", "||", "!", "(", ")", "{", "}", "[", "]", "^","~", "*", "?", ":"].freeze
+  SPECIAL_CHAR = ["+", "-", "&&", "||", "!", "(", ")", "{", "}", "[", "]", "^", "~", "*", "?", ":"].freeze
   ROLES = [:user, :admin].freeze
   enum role: ROLES, _default: :user
 
   validate :password_validation, if: :password_changed?
   validates :first_name, :last_name, presence: true
+
+  def set_user_invite(password)
+    self.password = password
+    self.password_confirmation = password
+    self.invited_user = true
+    self.skip_confirmation!
+  end
 
   private
 
@@ -19,7 +26,7 @@ class User < ApplicationRecord
     [:id, :email, :first_name, :last_name, :role]
   end
 
-  def check_password_changed
+  def set_invite_user
     if encrypted_password_changed?
       self.invited_user = false
     end
