@@ -12,11 +12,11 @@
   </div>
   <div class="form-group mb-2">
     <%= f.label :status, "Status :" %>
-    <%= f.select :status, Product::STATUSES, {}, { class: "form-control" } %>
+    <%= f.select :status, Product::STATUSES, {}, class: "form-control" %>
   </div>
   <div class="form-group mb-2">
     <%= f.label  "Select Category :" %>
-    <%= f.select :category_id, category_drop_down ,{}, {class: "form-control"} %>
+    <%= f.select :category_id, category_drop_down ,{}, class: "form-control" %>
   </div>  
   <div class="form-group mt-2 mb-2">
     <%= f.label "Upload Product Image" %>

@@ -1,5 +1,5 @@
 class Admin::CategoriesController < AdminController
-  before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :find_category, only: %i[ show edit update destroy ]
 
   def index
     @categories = Category.all
@@ -12,27 +12,27 @@ class Admin::CategoriesController < AdminController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to admin_categories_path, notice: "New Category Added Successfully.."
+      redirect_to admin_categories_path, notice: "New Category Added Successfully."
     else
       render 'new'
     end  
   end
 
-  def show;end
+  def show; end
 
-  def edit;end
+  def edit; end
 
   def destroy
+    @category.destroy
+
     respond_to do |format|
-      @category.destroy
       format.js
     end    
   end
 
   def update
     if @category.update(category_params)
-      flash[:notice] = "Category Updated Successfully.."
-      redirect_to admin_categories_path
+      redirect_to admin_categories_path, notice: "Category Updated Successfully."
     else
       render 'edit'
     end
@@ -40,7 +40,7 @@ class Admin::CategoriesController < AdminController
 
   private
 
-  def set_category
+  def find_category
     @category = Category.find(params[:id])
   end
 

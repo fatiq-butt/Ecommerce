@@ -12,7 +12,6 @@ class Admin::ProductsController < AdminController
       format.js
       format.csv { send_data CsvGenerationService.new('Product').call, filename: "products-#{Date.today}.csv" }
     end
-    
   end
   
   def new
