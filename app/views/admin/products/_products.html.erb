@@ -5,9 +5,7 @@
   <td><%= products.status %></td>
   <td>
     <%= link_to "Show", admin_product_path(products), class: "btn btn-primary"  %>
-      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_product_<%= products.id %>">
-        Delete
-      </button>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_product_<%= products.id %>">Delete</button>
     <%= link_to "Edit", edit_admin_product_path(products), class: "btn btn-primary" %>
   </td>
 </tr>
