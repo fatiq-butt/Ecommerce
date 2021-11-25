@@ -1,5 +1,5 @@
 module ProductsHelper
   def currency_price(price)
-    "$#{ price.to_s }"
+    "$#{price.to_s}"
   end
 end
