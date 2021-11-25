@@ -1,19 +1,16 @@
 class Admin::ProductsController < AdminController
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :find_product, only: %i[ show edit update destroy ]
   
   def index
-    if params[:order].present?
-        @pagy, @products = pagy(Product.all.order(params[:sort] => params[:order]), items: 5)
-    elsif params[:search].present?
-        @pagy, @products = pagy(Product.all.global_product_search(params[:search]), items: 5)
-    else
-      @pagy, @products = pagy(Product.all, items: 5)
-    end
+    products = Product.all
+    products = products.global_product_search(params[:search]) if params[:search].present?
+    products = products.order(params[:sort] => params[:order]) if params[:order].present?
+    @pagy, @products = pagy(products, items: 5)
 
     respond_to do |format|
       format.html
       format.js
-      format.csv { send_data Product.generate_csv, filename: "products-#{Date.today}.csv" }
+      format.csv { send_data CsvGenerationService.new('Product').call, filename: "products-#{Date.today}.csv" }
     end
     
   end
@@ -25,21 +22,22 @@ class Admin::ProductsController < AdminController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to admin_products_path, notice: "New Product Added Successfully.."
+      redirect_to admin_products_path, notice: "New Product Added Successfully."
     else
       render 'new'
     end  
   end
 
-  def show;end
+  def show; end
 
-  def edit;end
+  def edit; end
 
   def destroy
+    @product.destroy
+
     respond_to do |format|
-      @product.destroy
       format.js
-    end    
+    end
   end
 
   def update
@@ -53,7 +51,7 @@ class Admin::ProductsController < AdminController
 
   private
 
-  def set_product
+  def find_product
     @product = Product.find(params[:id])
   end
 
