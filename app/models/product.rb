@@ -1,4 +1,3 @@
-require 'csv'
 class Product < ApplicationRecord
   include PgSearch::Model
 

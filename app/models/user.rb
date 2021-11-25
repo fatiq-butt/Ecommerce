@@ -2,7 +2,6 @@ class User < ApplicationRecord
   include PgSearch::Model
 
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable, :confirmable
-
   before_update :set_invite_user_field
 
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
