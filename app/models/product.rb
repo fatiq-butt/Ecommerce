@@ -11,9 +11,7 @@ class Product < ApplicationRecord
   validates :price, numericality: {only_integer: false}, presence: true 
   validates :title, :description, :status, :images, presence: true 
 
-  private
-  
-  def self.generate_csv
-    CsvFormat.to_csv(self,"id", "title", "price", "description", "status")
+  def self.csv_attributes
+    [:id, :title, :price, :status]
   end
 end
