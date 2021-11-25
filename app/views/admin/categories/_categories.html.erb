@@ -1,0 +1,28 @@
+<tr id="category_<%= categories.id %>">
+  <td><%= categories.id %></td>
+  <td><%= categories.name %></td>
+  <td>
+    <%= link_to "Show", admin_category_path(categories), class: "btn btn-primary"  %>
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#category_modal_<%= categories.id %>">
+        Delete
+      </button>
+    <%= link_to "Edit", edit_admin_category_path(categories), class: "btn btn-primary" %>
+  </td>
+</tr>
+<div class="modal" id="category_modal_<%= categories.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Category Request</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this category?
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Delete", admin_category_path(categories), method: :delete, class: "btn btn-danger", data: { bs_dismiss: :modal }, remote: true %>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>

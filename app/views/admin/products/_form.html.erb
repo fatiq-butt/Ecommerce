@@ -12,9 +12,13 @@
   </div>
   <div class="form-group mb-2">
     <%= f.label :status, "Status :" %>
-    <%= f.select :status, Product::STATUSES, {}, { class: "form-control" } %>
+    <%= f.select :status, Product::STATUSES, {}, class: "form-control" %>
   </div>
-  <div class="form-group">
+  <div class="form-group mb-2">
+    <%= f.label  "Select Category :" %>
+    <%= f.select :category_id, category_options ,{}, class: "form-control" %>
+  </div>  
+  <div class="form-group mt-2 mb-2">
     <%= f.label "Upload Product Image" %>
     <%= f.file_field :images, multiple: true, accept: 'image/png,image/jpeg', direct_upload: true %>  
   </div>

@@ -51,10 +51,11 @@ class Admin::ProductsController < AdminController
   private
 
   def find_product
-    @product = Product.find(params[:id])
+    @product = Product.find_by(id: params[:id])
+    redirect_to admin_products_path if !@product
   end
 
   def product_params
-    params.require(:product).permit(:title, :price, :description, :status, images: [])
+    params.require(:product).permit(:title, :price, :description, :status, :category_id, images: [])
   end
 end

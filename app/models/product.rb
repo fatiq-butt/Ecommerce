@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  belongs_to :category
+
   include PgSearch::Model
 
   has_many_attached :images, dependent: :destroy

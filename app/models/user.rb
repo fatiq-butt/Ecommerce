@@ -20,11 +20,11 @@ class User < ApplicationRecord
     self.skip_confirmation!
   end
 
-  private
-
   def self.csv_attributes
     [:id, :email, :first_name, :last_name, :role]
   end
+
+  private
 
   def set_invite_user_field
     if encrypted_password_changed?
