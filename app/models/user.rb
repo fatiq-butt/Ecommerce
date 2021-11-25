@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
 
-  SPECIAL_CHAR = ["+", "-", "&&", "||", "!", "(", ")", "{", "}", "[", "]", "^", "~", "*", "?", ":"].freeze
+  SPECIAL_CHAR = ["+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^", "~", "*", "?", ":"].freeze
   ROLES = [:user, :admin].freeze
   enum role: ROLES, _default: :user
 
@@ -33,7 +33,6 @@ class User < ApplicationRecord
   end
 
   def password_changed?
-
     new_record? || encrypted_password_changed?
   end
 
