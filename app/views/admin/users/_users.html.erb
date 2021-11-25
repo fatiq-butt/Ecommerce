@@ -18,7 +18,7 @@
         <button type="button" class="btn-close" id="modal_close_btn_<%= users.id %>" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        Are you sure? You want to delete this user
+        Are you sure you want to delete this user?
       </div>
       <div class="modal-footer">
         <%= link_to "Yes", admin_user_path(users), method: :delete, class: "btn btn-danger", data: { bs_dismiss: :modal }, remote: true %>
