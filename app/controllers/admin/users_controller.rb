@@ -21,8 +21,7 @@ class Admin::UsersController < AdminController
 
   def update
     if @user.update(user_params)
-      flash[:notice] = "User Updated Successfully."
-      redirect_to admin_users_path
+      redirect_to admin_users_path, notice: "User Updated Successfully."
     else
       render 'edit'
     end
