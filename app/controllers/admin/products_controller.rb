@@ -3,7 +3,7 @@ class Admin::ProductsController < AdminController
   
   def index
     products = Product.all
-    products = products.global_search(params[:search]) if params[:search].present?
+    products = products.global_product_search(params[:search]) if params[:search].present?
     products = products.order(params[:sort] => params[:order]) if params[:order].present?
     @pagy, @products = pagy(products, items: 5)
 
@@ -32,7 +32,7 @@ class Admin::ProductsController < AdminController
   def edit; end
 
   def destroy
-    # @product.destroy
+    @product.destroy
 
     respond_to do |format|
       format.js
