@@ -1,0 +1,36 @@
+<div id="wrapper">
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6">
+              <h2> Invite User </h2>
+            </div>  
+            <hr></hr>
+
+            <%= form_for(@user, url: admin_users_path) do |f| %>
+            <div class="form-outline mb-4">
+              <%= f.label :first_name , class: "form-label"%><br />
+              <%= f.text_field :first_name, autofocus: true, required: true, class:"form-control form-control-lg" %>
+            </div>
+            <div class="form-outline mb-4">
+              <%= f.label :last_name, class: "form-label" %><br />
+              <%= f.text_field :last_name, autofocus: true, required: true, class:"form-control form-control-lg"%>
+            </div>
+            <div class="form-outline mb-4">
+              <%= f.label :email, class: "form-label"%><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class:"form-control form-control-lg" %>
+            </div>
+            <div class="form-outline mb-4">
+              <%= f.label :query, "Role:" %>
+              <%= f.select :role, ["user"] %>
+            </div>
+            <%= f.submit "Invite", class: "btn btn-primary btn-lg btn-block" %>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -3,8 +3,8 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource
     respond_to do |format|
       format.js
-    end    
-  end  
+    end
+  end
 
   def create
     build_resource(sign_up_params)

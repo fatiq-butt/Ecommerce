@@ -35,6 +35,20 @@ class Admin::UsersController < AdminController
     end  
   end
 
+  def new
+    @user = User.new     
+  end  
+
+  def create
+    @user = User.new(user_params)
+    @password = User.generate_random_password
+    @user.set_user_invitation(@password)
+    if @user.save
+      InviteMailer.with(user: @user, password: @password).invite_created.deliver_now
+      redirect_to admin_users_path, notice: "Invite email sent successfully"
+    end
+  end
+
   private 
 
   def user_params
@@ -44,4 +58,8 @@ class Admin::UsersController < AdminController
   def find_user
     @user = User.find(params[:id])
   end  
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :role)
+  end
 end
