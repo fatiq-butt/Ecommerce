@@ -1,5 +1,5 @@
 <center>
-<% flash.each do |key, value| %>
+  <% flash.each do |key, value| %>
     <%= content_tag :div, value, class: build_alert_classes(key) %>
-<% end %>
+  <% end %>
 </center>

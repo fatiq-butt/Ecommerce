@@ -1,5 +1,4 @@
 module AdminHelper
-
   def sorting_method(column)
     if(params[:sort] == column && params[:order] == "ASC")
       "DESC"
@@ -7,5 +6,4 @@ module AdminHelper
       "ASC"
     end
   end
-  
 end
