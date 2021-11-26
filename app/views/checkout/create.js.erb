@@ -1,6 +1,8 @@
-// var stripe = Stripe("<%= Rails.application.credentials[:stripe][:public] %>");
-// stripe.redirectToCheckout({
-//   sessionId: '<%= @session.id %>'
-// }).then(function (result) {
-//   console.log(result.error.message);
-// });
+<% if params[:payment_method] == 'card' %>
+  var stripe = Stripe("<%= Rails.application.credentials[:stripe][:public] %>");
+  stripe.redirectToCheckout({
+    sessionId: '<%= @session.id %>'
+  }).then(function (result) {
+    console.log(result.error.message);
+  });
+<% end %>

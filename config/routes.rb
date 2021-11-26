@@ -27,5 +27,4 @@ Rails.application.routes.draw do
   delete 'line_items/:id', to: "line_items#destroy"
   post 'checkout/confirmation', to: "checkout#confirmation", as: "place_order"
   post 'checkout/create_order', to: "checkout#create_order", as: "create_order"
-  get 'checkout/successful', to: "checkout#successful_order", as: "order_successful"
 end

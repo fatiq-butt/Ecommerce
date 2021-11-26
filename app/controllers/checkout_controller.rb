@@ -21,29 +21,19 @@ class CheckoutController < ApplicationController
   end
 
   def create
-
     @line_items = current_user.cart.line_items_details(current_user.orders.last.coupon)
-    byebug
     @order = current_user.orders.last
-    result = PlaceOrder.call(items: @line_items, order: @order, cart_line_items: current_user.cart.line_items)
+    result = PlaceOrder.call(payment_method: params[:payment_method], items: @line_items, order: @order, cart_line_items: current_user.cart.line_items)
 
-
+    if result.success?
+      @session = result.session
+      flash[:notice] = "Your order Placed Successfully."
+    else
+      flash[:error] = result.message
+    end
     respond_to do |format|
       format.js
     end
-  end
-
-  def confirmation
-    if params[:payment_method] != "card"
-      current_user.orders.last.confrimed_order()
-      respond_to do |format|
-        format.js {redirect_to order_successful_path}
-      end
-    end
-  end
-
-  def successful_order
-    current_user.orders.last.confrimed_order()
   end
 
   private

@@ -10,7 +10,7 @@ class Cart < ApplicationRecord
     else
       @sum = line_items.collect {|line_item| line_item.product.price*line_item.quantity}.sum
     end
-    @sum
+    @sum.round(3)
   end
 
   def line_items_details(coupon)
