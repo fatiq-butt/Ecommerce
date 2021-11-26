@@ -18,26 +18,13 @@
                 <% end %>
               
               </div>
-            </div>  
-          <hr></hr>
-
-          <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%= render partial: 'users', collection: @users %>
-            </tbody>
-          </table>
-          
+            </div>
+            <hr></hr>
+            <div id="user_listing_table">
+              <%= render partial: 'user_table' %>
+            </div>
+          </div>
         </div>
-        <%= pagy_bootstrap_nav(@pagy).html_safe %>
       </div>
     </div>
   </div>

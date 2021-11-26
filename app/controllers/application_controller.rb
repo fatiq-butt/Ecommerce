@@ -14,6 +14,9 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if current_user.admin?
       admin_users_path
+    elsif current_user.user? && current_user.invited_user
+      flash[:notice] = "Change your password to something you will remember"
+      edit_user_registration_path
     else
       root_path
     end
