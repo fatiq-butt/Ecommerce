@@ -1,11 +1,11 @@
 class Product < ApplicationRecord
-  belongs_to :category
-
   include PgSearch::Model
 
+  has_and_belongs_to_many :coupons
   has_many_attached :images, dependent: :destroy
+  belongs_to :category
 
-  pg_search_scope :global_product_search, against: [:id, :title, :price, :description, :status], using: { tsearch: { prefix: true } }
+  pg_search_scope :global_search, against: [:id, :title, :price, :description, :status], using: { tsearch: { prefix: true } }
 
   STATUSES = ["Publish", "Draft", "Pending"].freeze
 

@@ -1,0 +1,29 @@
+<div class="coupon-module">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID
+          <%= link_to sort: :id, order: sorting_method("id"), remote: true  do %>
+            <i class="fas fa-sort"></i>
+          <%end%>
+        </th>
+        <th scope="col">Code Name
+          <%= link_to sort: :name, order: sorting_method("name"), remote: true  do %>
+            <i class="fas fa-sort"></i>
+          <%end%>
+        </th>
+        <th scope="col">Discount
+          <%= link_to sort: :discount, order: sorting_method("discount"), remote: true  do %>
+            <i class="fas fa-sort"></i>
+          <%end%>
+        </th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'coupons', collection: @coupons %>
+    </tbody>
+  </table>  
+  <p><%= link_to("Generate Report", admin_coupons_path(format: :csv), class: "btn btn-primary") %></p>
+  <%= pagy_bootstrap_nav(@pagy).html_safe %>
+</div>
