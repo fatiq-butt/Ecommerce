@@ -3,24 +3,24 @@
     <%= f.label :title , "Title: "%>
     <%= f.text_field :title, class: "form-control", required: true %><br>
   </div>
-    <%= f.label :price , "Price: "%>
+    <%= f.label :price, "Price: "%>
     <%= f.number_field :price, class: "form-control", required: true, step: :any %><br>
   </div>   
   <div class="form-group">
-    <%= f.label :description , "Description :" %>
+    <%= f.label :description, "Description :" %>
     <%= f.text_field :description, class: "form-control", required: true %><br>
   </div>
   <div class="form-group mb-2">
-    <%= f.label :status , "Status :" %>
-    <%= f.select :status, Product::STATUS, {}, {class: "form-control"} %>
+    <%= f.label :status, "Status :" %>
+    <%= f.select :status, Product::STATUSES, {}, class: "form-control" %>
   </div>
   <div class="form-group mb-2">
     <%= f.label  "Select Category :" %>
-    <%= f.select :category_id, category_drop_down ,{}, {class: "form-control"} %>
+    <%= f.select :category_id, category_options ,{}, class: "form-control" %>
   </div>  
   <div class="form-group mt-2 mb-2">
     <%= f.label "Upload Product Image" %>
     <%= f.file_field :images, multiple: true, accept: 'image/png,image/jpeg', direct_upload: true %>  
   </div>
-  <%= f.submit class: "btn btn-primary" %>    
+  <%= f.submit class: "btn btn-primary mt-3" %>
 <% end %>

@@ -1,5 +1,5 @@
 module CouponsHelper
-  def coupons_drop_down
-    Product.all.map{|cat| [cat.title,cat.id]}
+  def coupon_options
+    Product.all.map { |cat| [cat.title, cat.id] }
   end
 end

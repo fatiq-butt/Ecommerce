@@ -4,19 +4,26 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <%= link_to "Home" , root_path , class: "nav-link active" %>
         </li>
-        <% if current_user && current_user.user? %>
+        <% if current_user&.user? %>
           <li class="nav-item">
               <%= link_to "Shop" , products_path , class: "nav-link" %>
           </li>
           <li class="nav-item">
               <%= link_to "Cart" , cart_path , class: "nav-link" %>
           </li>
-        <%elsif current_user && current_user.admin? %>
+          <li class="nav-item">
+              <%= link_to "My Profile" , profile_path , class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+              <%= link_to "Edit Profile" , edit_user_registration_path , class: "nav-link" %>
+          </li>
+        <% elsif current_user&.admin? %>
           <li class="nav-item">
               <%= link_to "Dashboard" , admin_users_path , class: "nav-link" %>
           </li>
@@ -32,5 +39,6 @@
         <% end %>
       </ul>
     </div>
+
   </div>
 </nav>
