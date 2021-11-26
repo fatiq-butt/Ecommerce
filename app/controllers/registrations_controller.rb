@@ -29,5 +29,4 @@ class RegistrationsController < Devise::RegistrationsController
       end
     end
   end
->>>>>>> main
 end

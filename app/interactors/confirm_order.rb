@@ -2,8 +2,6 @@ class ConfirmOrder
   include Interactor
 
   def call
-    if !context.order.confrimed_order
-      context.fail!(message: "Could not confirm the order")
-    end
+    context.fail!(message: "Could not confirm the order") unless context.order.confrimed_order
   end
 end

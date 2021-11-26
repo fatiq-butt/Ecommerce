@@ -5,8 +5,11 @@ class Order < ApplicationRecord
   belongs_to :coupon, optional: true
 
   def self.create_order(user, total_price, discounted_price, coupon)
-    unless user.orders.where(confirmed: false).any?
-      order = user.orders.create(total_price: total_price, discounted_total: discounted_price, coupon: coupon)
+    unconfirmed_order = user.orders.where(confirmed: false)
+    if unconfirmed_order.any?
+      unconfirmed_order.update(total_price: total_price, discounted_total: discounted_price, coupon: coupon)
+    else
+      user.orders.create(total_price: total_price, discounted_total: discounted_price, coupon: coupon)
     end
   end
 
