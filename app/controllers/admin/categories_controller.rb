@@ -42,7 +42,7 @@ class Admin::CategoriesController < AdminController
 
   def find_category
     @category = Category.find_by(id: params[:id])
-    redirect_to admin_categories_path if !@category
+    redirect_to admin_categories_path unless @category
   end
 
   def category_params

@@ -6,7 +6,7 @@ class Coupon < ApplicationRecord
   validates :name, presence: true
   validates :discount, numericality: true, presence: true
 
-  pg_search_scope :global_coupon_search, against: [:id, :name, :discount], using: { tsearch: { prefix: true } }
+  pg_search_scope :global_search, against: [:id, :name, :discount], using: { tsearch: { prefix: true } }
 
   private
 

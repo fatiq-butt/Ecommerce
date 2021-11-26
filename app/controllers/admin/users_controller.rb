@@ -1,12 +1,11 @@
 class Admin::UsersController < AdminController
+  include FilterRecords
+
   before_action :authenticate_user!
   before_action :find_user, only: %i[show edit update destroy]
 
   def index
-    users = User.user
-    users = users.global_search(params[:search]) if params[:search].present?
-    users = users.order(params[:sort] => params[:order]) if params[:order].present?
-    @pagy, @users = pagy(users, items: 5)
+    @pagy, @users = sort_page_filter(User)
 
     respond_to do |format|
       format.html
@@ -57,7 +56,7 @@ class Admin::UsersController < AdminController
 
   def find_user
     @user = User.find_by(id: params[:id])
-    redirect_to admin_users_path if !@user
+    redirect_to admin_users_path unless @user
   end  
 
   def user_params

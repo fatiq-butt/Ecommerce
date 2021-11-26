@@ -1,12 +1,10 @@
 class Admin::ProductsController < AdminController
+  include FilterRecords
+
   before_action :find_product, only: %i[ show edit update destroy ]
   
   def index
-    products = Product.all
-    products = products.global_product_search(params[:search]) if params[:search].present?
-    products = products.order(params[:sort] => params[:order]) if params[:order].present?
-    @pagy, @products = pagy(products, items: 5)
-
+    @pagy, @products = sort_page_filter(Product)
     respond_to do |format|
       format.html
       format.js
@@ -51,7 +49,7 @@ class Admin::ProductsController < AdminController
 
   def find_product
     @product = Product.find_by(id: params[:id])
-    redirect_to admin_products_path if !@product
+    redirect_to admin_products_path unless @product
   end
 
   def product_params

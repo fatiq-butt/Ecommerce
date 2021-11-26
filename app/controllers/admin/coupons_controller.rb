@@ -1,11 +1,10 @@
 class Admin::CouponsController < AdminController
+  include FilterRecords
+
   before_action :find_coupon, only: %i[ show edit update destroy ]
 
   def index
-    coupons = Coupon.all
-    coupons = coupons.global_coupon_search(params[:search]) if params[:search].present?
-    coupons = coupons.order(params[:sort] => params[:order]) if params[:order].present?
-    @pagy, @coupons = pagy(coupons, items: 5)
+    @pagy, @coupons = sort_page_filter(Coupon)
 
     respond_to do |format|
       format.html
@@ -21,7 +20,7 @@ class Admin::CouponsController < AdminController
   def create
     @coupon = Coupon.new(coupon_params)
     if @coupon.save
-      redirect_to admin_coupons_path, notice: "New Coupon Added Successfully.."
+      redirect_to admin_coupons_path, notice: "New Coupon Added Successfully."
     else
       render 'new'
     end  
@@ -51,7 +50,7 @@ class Admin::CouponsController < AdminController
 
   def find_coupon
     @coupon = Coupon.find_by(id: params[:id])
-    redirect_to admin_coupons_path if !@coupon
+    redirect_to admin_coupons_path unless @coupon
   end
 
   def coupon_params
