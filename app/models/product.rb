@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :coupons
   has_many_attached :images, dependent: :destroy
   has_many :line_items, dependent: :destroy
-  has_many :receipts
+  has_many :receipts, dependent: :destroy
   has_many :orders, through: :receipts
 
   belongs_to :category
