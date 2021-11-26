@@ -40,7 +40,7 @@ class CheckoutController < ApplicationController
   private
 
   def create_stripe_session
-    @line_items = current_user.cart.line_items_details(current_user.orders.last.coupon)
+    @line_items = @cart.line_items_details(current_user.orders.last.coupon)
     @session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
       line_items: @line_items,
