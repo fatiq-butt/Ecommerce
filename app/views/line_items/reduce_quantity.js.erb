@@ -1,0 +1,2 @@
+$('#quantity_input_form_<%= @row_index %>').val("<%= @line_item.quantity %>")
+$($(".product-total")[<%= @row_index %>]).html("<%= calculate_price(@line_item.product.price, @line_item.quantity) %>");

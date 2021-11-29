@@ -1,0 +1,71 @@
+<%= form_with url: user_path(current_user), method: :patch, local: false do |f| %>
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :first_name, "First Name: "%>
+        <%= f.text_field :first_name, value: current_user.first_name, class: "form-control checkout_input", required: true %><br>
+      </div>  
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :last_name, "Last Name: "%>
+        <%= f.text_field :last_name, value: current_user.last_name, class: "form-control checkout_input", required: true, step: :any %><br>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :company_name, "Company Name :" %>
+        <%= f.text_field :company_name, value: current_user.company_name, class: "form-control checkout_input", required: true %><br>
+      </div>  
+    </div>  
+  </div> 
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group customer_country_dropdown">
+        <%= f.label :country, "Country :" %>
+        <%= f.select :country, options_for_select(countries_drop_down, current_user.country), {}, {value: current_user.country, class: "form-control checkout_input", id: "country_select_dropdown_checkout", required: true} %><br>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :state, "State :" %>
+        <%= f.select :state, options_for_select(state_drop_down, current_user.state), {}, {value: current_user.state, class: "form-control checkout_input", id: "customer_state_dropdown_checkout"} %>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :city, "City :" %>
+        <%= f.select :city, options_for_select(city_drop_down, current_user.city), {}, {value: current_user.city, class: "form-control checkout_input", id: "customer_city_dropdown_checkout"} %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :address , "Address :" %>
+        <%= f.text_field :address, value: current_user.address, class: "form-control checkout_input", required: true %><br>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :phone, "Phone :" %>
+        <%= f.text_field :phone, value: current_user.phone, class: "form-control checkout_input", required: true %><br>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :extension, "Extension :" %>
+        <%= f.text_field :extension, value: current_user.extension, class: "form-control checkout_input", required: true %><br>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :zip_code, "Zip Code :" %>
+        <%= f.text_field :zip_code, value: current_user.zip_code, class: "form-control checkout_input", required: true %><br>
+      </div>
+    </div>
+  </div>
+  <%= f.submit 'continue', class: "btn btn-primary mb-5", id: "submit_btn_cust_info_update" %>
+<% end %>

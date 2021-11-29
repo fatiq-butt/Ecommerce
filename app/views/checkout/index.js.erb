@@ -1,0 +1,28 @@
+<% if @states %>
+  var state = document.getElementById("customer_state_dropdown_checkout");
+  var placeholder = document.createElement("option");
+  placeholder.text = "Choose a state";
+  state.innerHTML = ""
+  document.getElementById("customer_city_dropdown_checkout").innerHTML = "";
+  state.append(placeholder);
+  <% @states.each do |s| %>
+    state.options[state.options.length] = new Option('<%= s[1] %>', '<%= s[0] %>');
+  <% end %>
+<% end %>
+
+<% if @cities %>
+  var city = document.getElementById("customer_city_dropdown_checkout");
+  var placeholder = document.createElement("option");
+  placeholder.text = "Choose a city";
+  placeholder.value = "";
+  city.innerHTML = ""
+  city.append(placeholder);
+  <% @cities.each do |s| %>
+    city.options[city.options.length] = new Option('<%= s %>', '<%= s %>');
+  <% end %>
+<% end %>
+
+<% if params[:coupon_code] %>
+  $('#line_items_cart').html("").append("<%= j render partial: 'line_items', collection: @line_items %>");
+  $('.total_checkout_price').children().html("<%= currency_price(@total_price) %>");
+<% end %>

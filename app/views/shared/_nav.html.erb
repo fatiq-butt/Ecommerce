@@ -10,7 +10,6 @@
         <li class="nav-item">
           <%= link_to "Home" , root_path , class: "nav-link active" %>
         </li>
-
         <% if current_user&.user? %>
           <li class="nav-item">
               <%= link_to "My Profile" , profile_path , class: "nav-link" %>
@@ -20,6 +19,9 @@
           </li>
           <li class="nav-item">
               <%= link_to "Shop" , products_path , class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+              <%= link_to "Cart" , cart_path , class: "nav-link" %>
           </li>
         <% elsif current_user&.admin? %>
           <li class="nav-item">
@@ -35,7 +37,6 @@
               <%= link_to "LogIn" , new_user_session_path , class: "nav-link" %>
           </li>
         <% end %>
-
       </ul>
     </div>
 

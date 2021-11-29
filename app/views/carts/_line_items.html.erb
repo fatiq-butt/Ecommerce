@@ -1,0 +1,22 @@
+<div class="row mb-4 d-flex justify-content-between align-items-center" id="line_items_in_cart_<%=line_items.id%>">
+  <div class="col-md-3 col-lg-3 col-xl-3">
+    <h6 class="text-black mb-0"><%= line_items.product.title %></h6>
+  </div>
+  <div class="col-md-2 col-lg-2 col-xl-2">
+    <span class="mb-0 product-price">$<%= line_items.product.price %></span>
+  </div>
+  <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+    
+    <%= link_to '', line_item_reduce_path(line_items, row_index: line_items_counter), method: :post, class: 'fas fa-minus btn btn-link px-2', remote: true %>
+    <input id="quantity_input_form_<%= line_items_counter %>" min="0" name="quantity" value="<%= line_items.quantity %>" type="number" class="form-control form-control-sm" />
+    <%= link_to '', line_item_add_path(line_items, row_index: line_items_counter), method: :post, class: 'fas fa-plus btn btn-link px-2', remote: true %>
+
+  </div>
+  <div class="col-md-2 col-lg-2 col-xl-2 total_prics_line_item">
+    <h6 class="mb-0 product-total">$<%= line_items.product.price* line_items.quantity %></h6>
+  </div>
+  <div class="col-md-2 col-lg-2 col-xl-2">
+    <%= link_to '', line_item_path(line_items), method: :delete, class: 'fas fa-window-close', remote: true %>
+  </div>
+  <hr class="my-4">
+</div>

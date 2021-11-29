@@ -4,6 +4,7 @@ require("@rails/activestorage").start();
 require("channels");
 require("jquery");
 require("custom/sign_up_click");
+require("custom/checkout_accordion");
 
 import $ from 'jquery';
 global.$ = jQuery;

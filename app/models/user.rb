@@ -2,8 +2,12 @@ class User < ApplicationRecord
   include PgSearch::Model
 
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable, :confirmable
-  before_update :set_invite_user_field
 
+  has_one :cart, dependent: :destroy
+  has_many :orders, dependent: :destroy
+
+  before_update :set_invite_user_field
+  after_create :create_cart_for_user
   pg_search_scope :global_search, against: [:first_name, :last_name, :email, :id], using: { tsearch: { prefix: true } }
 
   SPECIAL_CHAR = ["+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^", "~", "*", "?", ":"].freeze
@@ -18,6 +22,10 @@ class User < ApplicationRecord
     self.password_confirmation = password
     self.invited_user = true
     self.skip_confirmation!
+  end
+
+  def create_cart_for_user
+    self.create_cart!
   end
 
   def self.csv_attributes

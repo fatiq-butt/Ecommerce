@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_09_045553) do
+ActiveRecord::Schema.define(version: 2021_11_17_072409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 2021_11_09_045553) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "carts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -65,6 +72,29 @@ ActiveRecord::Schema.define(version: 2021_11_09_045553) do
     t.index ["product_id"], name: "index_coupons_products_on_product_id"
   end
 
+  create_table "line_items", force: :cascade do |t|
+    t.integer "quantity", default: 1
+    t.bigint "product_id", null: false
+    t.bigint "cart_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.index ["product_id"], name: "index_line_items_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "coupon_id"
+    t.float "total_price"
+    t.float "discounted_total"
+    t.boolean "confirmed", default: false
+    t.string "payment_method"
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title", null: false
     t.float "price", null: false
@@ -74,6 +104,16 @@ ActiveRecord::Schema.define(version: 2021_11_09_045553) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "order_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_receipts_on_order_id"
+    t.index ["product_id"], name: "index_receipts_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -92,11 +132,26 @@ ActiveRecord::Schema.define(version: 2021_11_09_045553) do
     t.string "unconfirmed_email"
     t.integer "role", null: false
     t.boolean "invited_user", default: false
+    t.string "company_name"
+    t.string "state"
+    t.string "address"
+    t.string "phone"
+    t.integer "extension"
+    t.string "city"
+    t.string "zip_code"
+    t.string "country"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "carts", "users"
+  add_foreign_key "line_items", "carts"
+  add_foreign_key "line_items", "products"
+  add_foreign_key "orders", "coupons"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
+  add_foreign_key "receipts", "orders"
+  add_foreign_key "receipts", "products"
 end

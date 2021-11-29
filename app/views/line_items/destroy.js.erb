@@ -1,0 +1,6 @@
+$("#line_items_in_cart_<%= @line_item.id %>").fadeOut(500, function(){
+  $(this).remove();
+});
+<% unless current_user.cart.line_items.any? %>
+  $('#cart_line_items_module').html("<%= j render partial: 'shared/empty_cart'%>");
+<% end %>
