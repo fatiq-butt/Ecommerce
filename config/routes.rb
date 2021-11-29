@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => {:registrations => "registrations"}
-  
-  devise_scope :user do
-    get 'user/edit', to: 'registrations#edit'
-  end
+  devise_for :users, controllers: {registrations: "registrations"}
 
   root to: 'main#index'
-  
+
+  devise_scope :user do
+    get 'profile', to: 'registrations#show'
+    get 'profile/edit', to: 'registrations#edit'
+  end
+
   namespace :admin do
     resources :users
     resources :products
@@ -31,7 +32,6 @@ Rails.application.routes.draw do
   post 'line_items', to: "line_items#create"
   get 'line_items/:id', to: "line_items#show", as: "line_item"
   delete 'line_items/:id', to: "line_items#destroy"
-  post 'checkout/confirmation', to: "checkout#confirmation", as: "place_order"
+  get 'checkout/confirmation', to: "checkout#confirmation", as: "place_order"
   post 'checkout/create_order', to: "checkout#create_order", as: "create_order"
-  get 'checkout/successful', to: "checkout#successful_order", as: "order_successful"
 end

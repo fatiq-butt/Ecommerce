@@ -1,19 +1,25 @@
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
     <li class="sidebar-brand">
-        <%= link_to "Users" , admin_users_path %>
+      <%= link_to "My Profile", profile_path %>
     </li>
     <li class="sidebar-brand">
-        <%= link_to "Invite User" , new_admin_user_path %>
+      <%= link_to "Edit My Profile", profile_edit_path %>
     </li>
     <li class="sidebar-brand">
-        <%= link_to "Products" , admin_products_path %>
+      <%= link_to "List all Users", admin_users_path %>
     </li>
     <li class="sidebar-brand">
-        <%= link_to "Category" , admin_categories_path %>
+      <%= link_to "Invite User", new_admin_user_path %>
     </li>
     <li class="sidebar-brand">
-        <%= link_to "Coupons" , admin_coupons_path %>
-    </li>  
+      <%= link_to "Products", admin_products_path %>
+    </li>
+    <li class="sidebar-brand">
+      <%= link_to "Category" , admin_categories_path %>
+    </li>
+    <li class="sidebar-brand">
+      <%= link_to "Coupons" , admin_coupons_path %>
+    </li>
   </ul>
 </div>
