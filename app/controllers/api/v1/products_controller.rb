@@ -1,5 +1,4 @@
 class Api::V1::ProductsController < ApplicationController
-  skip_before_action :verify_authenticity_token
   before_action :product_params, only: [:create, :update]
   before_action :set_product, only: [:show, :update, :destroy]
 
@@ -23,7 +22,6 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def destroy
-    @products = Product.all
     @product.destroy
     render json: @products
   end
