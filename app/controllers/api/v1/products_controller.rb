@@ -36,6 +36,8 @@ class Api::V1::ProductsController < Api::BaseController
     render json: { alert: "Record deleted" }
   end
 
+  privateg
+
   def product_params
     params.permit(:title, :price, :description, :status, :category_id)
   end
