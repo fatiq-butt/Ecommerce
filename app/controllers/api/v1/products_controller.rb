@@ -1,5 +1,4 @@
-class Api::V1::ProductsController < ApplicationController
-  before_action :product_params, only: [:create, :update]
+class Api::V1::ProductsController < Api::BaseController
   before_action :set_product, only: [:show, :update, :destroy]
 
   def index
@@ -23,7 +22,7 @@ class Api::V1::ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    render json: @products
+    render json: { alert: "Record deleted" }
   end
 
   def product_params
