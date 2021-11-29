@@ -1,5 +1,5 @@
 class Api::V1::ProductsController < Api::BaseController
-  before_action :set_product, only: [:show, :update, :destroy]
+  before_action :find_product, only: [:show, :update, :destroy]
 
   def index
     @products = Product.all
@@ -12,12 +12,23 @@ class Api::V1::ProductsController < Api::BaseController
 
   def create
     @product = Product.create(product_params)
-    render json: @product
+    if @product.persisted?
+      render json: @product
+    else
+      render json: {
+        error: @product.errors.messages
+      }, status: 400
+    end
   end
 
   def update
-    @product.update(product_params)
-    render json: @product
+    if @product.update(product_params)
+      render json: @product
+    else
+      render json: {
+        error: @product.errors.messages
+      }, status: 400
+    end
   end
 
   def destroy
@@ -29,7 +40,7 @@ class Api::V1::ProductsController < Api::BaseController
     params.permit(:title, :price, :description, :status, :category_id)
   end
 
-  def set_product
+  def find_product
     @product = Product.find(params[:id])
   end
 end
