@@ -1,19 +1,15 @@
 class Admin::CouponsController < AdminController
-  before_action :set_coupon, only: %i[ show edit update destroy ]
+  include FilterRecords
+
+  before_action :find_coupon, only: %i[ show edit update destroy ]
 
   def index
-    if params[:order].present?
-        @pagy, @coupons = pagy(Coupon.all.order(params[:sort] => params[:order]), items: 5)
-    elsif params[:search].present?
-        @pagy, @coupons = pagy(Coupon.all.global_coupon_search(params[:search]), items: 5)
-    else
-      @pagy, @coupons = pagy(Coupon.all, items: 5)
-    end
+    @pagy, @coupons = sort_page_filter(Coupon)
 
     respond_to do |format|
       format.html
       format.js
-      format.csv { send_data Coupon.generate_csv, filename: "coupons-#{Date.today}.csv" }
+      format.csv { send_data CsvGenerationService.new('Coupon').call, filename: "coupons-#{Date.today}.csv" }
     end
   end
 
@@ -24,27 +20,27 @@ class Admin::CouponsController < AdminController
   def create
     @coupon = Coupon.new(coupon_params)
     if @coupon.save
-      redirect_to admin_coupons_path, notice: "New Coupon Added Successfully.."
+      redirect_to admin_coupons_path, notice: "New Coupon Added Successfully."
     else
       render 'new'
     end  
   end
 
-  def show;end
+  def show; end
 
-  def edit;end
+  def edit; end
 
   def destroy
+    @coupon.destroy
+
     respond_to do |format|
-      @coupon.destroy
       format.js
     end    
   end
 
   def update
     if @coupon.update(coupon_params)
-      flash[:notice] = "Coupon Updated Successfully.."
-      redirect_to admin_coupons_path
+      redirect_to admin_coupons_path, notice: "Coupon Updated Successfully."
     else
       render 'edit'
     end
@@ -52,8 +48,9 @@ class Admin::CouponsController < AdminController
 
   private
 
-  def set_coupon
-    @coupon = Coupon.find(params[:id])
+  def find_coupon
+    @coupon = Coupon.find_by(id: params[:id])
+    redirect_to admin_coupons_path unless @coupon
   end
 
   def coupon_params

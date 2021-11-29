@@ -63,7 +63,7 @@
               <div class="accordion-body" id="final_checkout_payment_card_div">
                 <p>Select your payment preferences:</p>
                 <p>Please Select your payment method below:</p>
-                <%= form_with url: place_order_path, method: :post, local: false do |f| %>
+                <%= form_with url: checkout_index_path, method: :post, local: false do |f| %>
                   <div class="form-check">
                     <%= f.radio_button :payment_method, "check", class: 'form-check-input' %>
                     <%= f.label :payment_method, "check", class: 'form-check-label'  %>

@@ -58,3 +58,4 @@ gem 'pagy'
 gem 'pg_search'
 gem 'city-state'
 gem 'stripe'
+gem "interactor-rails", "~> 2.0"
