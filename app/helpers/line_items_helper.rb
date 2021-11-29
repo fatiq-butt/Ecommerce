@@ -10,4 +10,8 @@ module LineItemsHelper
     end
     "$#{total.round(3).to_s}"
   end
+
+  def calculate_price(price, quantity)
+    "$#{ (price * quantity).to_s }"
+  end
 end

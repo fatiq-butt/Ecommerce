@@ -3,7 +3,6 @@
   stripe.redirectToCheckout({
     sessionId: '<%= @session.id %>'
   }).then(function (result) {
-    debugger
     console.log(result.error.message);
   });
 <% end %>

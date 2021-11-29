@@ -4,7 +4,7 @@ class CheckoutController < ApplicationController
   before_action :authenticate_user!
   before_action :set_states, :set_cities, only: [:index]
   before_action :find_cart
-  before_action :create_stripe_session
+  before_action :create_stripe_session, only: [:create]
 
   def index
     @line_items = @cart.line_items
