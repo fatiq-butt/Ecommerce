@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   has_many :line_items, dependent: :destroy
   has_many :receipts, dependent: :destroy
   has_many :orders, through: :receipts
+  has_rich_text :description
 
   belongs_to :category
 
