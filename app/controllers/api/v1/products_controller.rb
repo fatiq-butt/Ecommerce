@@ -17,7 +17,7 @@ class Api::V1::ProductsController < Api::BaseController
     else
       render json: {
         error: @product.errors.messages
-      }, status: 400
+      }, status: 422
     end
   end
 
@@ -27,7 +27,7 @@ class Api::V1::ProductsController < Api::BaseController
     else
       render json: {
         error: @product.errors.messages
-      }, status: 400
+      }, status: 422
     end
   end
 
