@@ -5,6 +5,8 @@ require("channels");
 require("jquery");
 require("custom/sign_up_click");
 require("custom/checkout_accordion");
+require("trix");
+require("@rails/actiontext");
 
 import $ from 'jquery';
 global.$ = jQuery;
