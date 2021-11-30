@@ -2,6 +2,6 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @products = Product.where(status: "Publish")
+    @products = Product.published
   end
 end

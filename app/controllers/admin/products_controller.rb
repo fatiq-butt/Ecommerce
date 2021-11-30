@@ -30,7 +30,7 @@ class Admin::ProductsController < AdminController
   def edit; end
 
   def destroy
-    if destoryed?
+    if product_destroy
       flash[:notice] = "Product is deleted Successfully."
     else
       flash[:notice] = "Can not delete the product, its status is deactivated."
@@ -48,13 +48,12 @@ class Admin::ProductsController < AdminController
 
   private
 
-  def destoryed?
+  def product_destroy
     if @product.receipts.any?
-      @product.update_columns(status: "Deactivated")
-      false
+      !@product.deactivated!
     else
       @product.destroy
-      true
+      @product.destroyed?
     end
   end
 

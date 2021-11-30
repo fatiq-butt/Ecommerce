@@ -12,7 +12,8 @@ class Product < ApplicationRecord
 
   pg_search_scope :global_search, against: [:id, :title, :price, :description, :status], using: { tsearch: { prefix: true } }
 
-  STATUSES = ["Publish", "Draft", "Pending", "Deactivated"].freeze
+  STATUSES = { published: "published", draft: "draft", pending: "pending", deactivated: "deactivated" }.freeze
+  enum status: STATUSES
 
   validates :price, numericality: true, presence: true
   validates :title, :description, :status, :images, presence: true 
