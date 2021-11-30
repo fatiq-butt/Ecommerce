@@ -1,0 +1,16 @@
+<div class="orders-module">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Product Category</th>
+        <th scope="col">Payment Method</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'orders', collection: @orders %>
+    </tbody>
+  </table>
+</div>
