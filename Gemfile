@@ -59,3 +59,4 @@ gem 'pg_search'
 gem 'city-state'
 gem 'stripe'
 gem "interactor-rails", "~> 2.0"
+gem 'active_model_serializers'

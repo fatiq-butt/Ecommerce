@@ -26,6 +26,8 @@ class CheckoutController < ApplicationController
 
   def create
     @order = current_user.orders.last
+    @order.payment_method = params[:payment_method]
+    @order.save
     redirect_to place_order_url unless params[:payment_method] == "card"
     respond_to do |format|
       format.js
