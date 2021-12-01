@@ -35,6 +35,6 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def find_orders
-    @orders = current_user.orders
+    @orders = current_user.orders.where(confirmed: true)
   end
 end

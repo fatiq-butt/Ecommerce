@@ -38,7 +38,7 @@
     </div>
   </div>
 </section>
-<% if @orders.any? %>
+<% if @orders.present? %>
   <center><h2>All orders Placed</h2></center>
   <section>
     <%= render partial: 'orders_table', resource: @orders %>
