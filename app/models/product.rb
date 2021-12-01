@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   has_many :orders, through: :receipts
   has_rich_text :description
 
-  belongs_to :category
+  belongs_to :category, optional: true
 
   pg_search_scope :global_search, against: [:id, :title, :price, :description, :status], using: { tsearch: { prefix: true } }
 
