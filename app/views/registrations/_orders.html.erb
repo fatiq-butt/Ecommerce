@@ -1,9 +1,0 @@
-<% orders.receipts.each do |receipt| %>
-  <tr>
-    <td><%= orders.id %></td>
-    <td><%= receipt.product.title %></td>
-    <td><%= receipt.quantity %></td>
-    <td><%= receipt.product.category.name %></td>
-    <td><%= orders.payment_method %></td>
-  </tr>
-<% end %>

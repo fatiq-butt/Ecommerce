@@ -1,6 +1,4 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_action :find_orders, only: [:show]
-
   def new
     build_resource
     respond_to do |format|
@@ -30,11 +28,5 @@ class RegistrationsController < Devise::RegistrationsController
         end
       end
     end
-  end
-
-  private
-
-  def find_orders
-    @orders = current_user.orders.where(confirmed: true)
   end
 end
