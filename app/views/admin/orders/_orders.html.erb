@@ -1,10 +1,14 @@
-<% order.receipts.each do |receipt| %>
+<% order.receipts.each_with_index do |receipt, index| %>
   <tr>
-    <td><%= order.user.id %></td>
-    <td><%= order.user.first_name %></td>
-    <td><%= order.user.company_name %></td>
-    <td><%= order.user.email %></td>
-    <td><%= order.user.phone %></td>
+    <% if index.zero? %>
+      <td><%= order.user.id %></td>
+      <td><%= order.user.first_name %></td>
+      <td><%= order.user.company_name %></td>
+      <td><%= order.user.email %></td>
+      <td><%= order.user.phone %></td>
+    <% else %>
+      <td colspan="5"></td>
+    <% end %>
     <td><%= receipt.quantity %></td>
     <td><%= receipt.product.title %></td>
     <td><%= receipt.product.category.name %></td>
