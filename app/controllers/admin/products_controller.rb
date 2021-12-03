@@ -30,22 +30,32 @@ class Admin::ProductsController < AdminController
   def edit; end
 
   def destroy
-    @product.destroy
-
-    respond_to do |format|
-      format.js
+    product_destroy
+    if @product.destroyed?
+      flash[:notice] = "Product is deleted Successfully."
+    else
+      flash[:notice] = "Can not delete the product, its status is deactivated."
     end
+    redirect_to admin_products_path
   end
 
   def update
     if @product.update(product_params)
-      redirect_to admin_products_path, "Product Updated Successfully."
+      redirect_to admin_products_path, notice: "Product Updated Successfully."
     else
       render 'edit'
     end
   end
 
   private
+
+  def product_destroy
+    if @product.receipts.any?
+      @product.deactivated!
+    else
+      @product.destroy
+    end
+  end
 
   def find_product
     @product = Product.find_by(id: params[:id])
